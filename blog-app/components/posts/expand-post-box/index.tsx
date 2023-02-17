@@ -18,25 +18,27 @@ const ExpandBoxPost: FC<ExpandBoxPostProps> = ({ post }) => {
 			transition={{ duration: 0.2 }}
 			className="group my-[50px] flex"
 		>
-			<motion.div
-				initial={{ scale: 0.9, opacity: 0 }}
-				animate={{ scale: 1, opacity: 1 }}
-				transition={{ duration: 0.3, ease: "easeInOut" }}
-				className="relative min-w-[500px] min-h-[320px] max-w-[500px] max-h-[320px] rounded-xl overflow-hidden"
-			>
-				<Image
-					src={urlFor(post.mainImage).url()}
-					alt={post.title}
-					width={500}
-					height={320}
-					className="group-hover:scale-110 scale-105 group-hover:rotate-1 duration-300 min-w-[500px] min-h-[320px] max-w-[500px] max-h-[320px] object-cover"
-				/>
-				<div className="flex items-center justify-center absolute -top-full duration-200 group-hover:top-0 left-0 bg-black bg-opacity-50 w-full h-full rounded-xl">
-					<div className="flex items-center justify-center w-16 h-16 rounded-full bg-green-600">
-						<RightArrow className="scale-75" />
+			<Link href={post.slug.current}>
+				<motion.div
+					initial={{ scale: 0.9, opacity: 0 }}
+					animate={{ scale: 1, opacity: 1 }}
+					transition={{ duration: 0.3, ease: "easeInOut" }}
+					className="relative min-w-[500px] cursor-pointer min-h-[320px] max-w-[500px] max-h-[320px] rounded-xl overflow-hidden"
+				>
+					<Image
+						src={urlFor(post.mainImage).url()}
+						alt={post.title}
+						width={500}
+						height={320}
+						className="group-hover:scale-110 scale-105 group-hover:rotate-1 duration-300 min-w-[500px] min-h-[320px] max-w-[500px] max-h-[320px] object-cover"
+					/>
+					<div className="flex items-center justify-center absolute -top-full duration-200 group-hover:top-0 left-0 bg-black bg-opacity-50 w-full h-full rounded-xl">
+						<div className="flex items-center justify-center w-16 h-16 rounded-full bg-green-600">
+							<RightArrow className="scale-75" />
+						</div>
 					</div>
-				</div>
-			</motion.div>
+				</motion.div>
+			</Link>
 			<motion.div
 				className="ml-10 py-3"
 				initial={{ scale: 0.9, opacity: 0 }}
@@ -54,8 +56,11 @@ const ExpandBoxPost: FC<ExpandBoxPostProps> = ({ post }) => {
 				</div>
 				<h1 className=" text-4xl font-medium my-3">{post.title}</h1>
 				<p className="text-sm text-gray-600 mb-5">{post.description}</p>
-				<Link href={`/users/${post.author.slug.current}`}>
-					<div className="flex gap-4 items-center ">
+				<Link
+					href={`/users/${post.author.slug.current}`}
+					className="w-fit block"
+				>
+					<div className="flex gap-4 items-center w-fit">
 						<Image
 							src={
 								post.author.imglink

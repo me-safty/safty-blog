@@ -32,9 +32,8 @@ export interface comment {
 	_id: string
 	_createdAt: string
 	comment: string
-	email: string
-	name: string
 	post: Post
+	author: Author
 }
 export interface category {
 	_id: string

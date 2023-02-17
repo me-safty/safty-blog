@@ -11,12 +11,6 @@ export default defineType({
       type: 'string',
     }),
     defineField({
-      name: 'approved',
-      title: 'Approved',
-      type: 'boolean',
-      description: "Comment won't show on the site without approval",
-    }),
-    defineField({
       name: 'email',
       title: 'Email',
       type: 'string',
@@ -42,7 +36,6 @@ export default defineType({
   preview: {
     select: {
       title: 'name',
-      media: 'image',
     },
   },
 })
