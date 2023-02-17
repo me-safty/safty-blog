@@ -34,6 +34,7 @@ export interface comment {
 	comment: string
 	email: string
 	name: string
+	post: Post
 }
 export interface category {
 	_id: string

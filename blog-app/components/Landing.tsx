@@ -1,7 +1,6 @@
 import { NextPage } from "next"
 import { signIn, useSession } from "next-auth/react"
 import Link from "next/link"
-import { useState } from "react"
 import { category, Post } from "../typing"
 import Baner from "./baner"
 import Catagories from "./Catagories"

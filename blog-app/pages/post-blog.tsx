@@ -47,6 +47,11 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 	const author = await sanityClint.fetch(query, {
 		id: session?.user?.email?.toLowerCase().split("@")[0],
 	})
+	if (!author) {
+		return {
+			notFound: true,
+		}
+	}
 	const categories = author.categories
 	return {
 		props: {

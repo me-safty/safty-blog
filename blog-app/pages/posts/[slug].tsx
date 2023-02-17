@@ -1,4 +1,5 @@
 import { GetStaticProps } from "next"
+import { getServerSession } from "next-auth"
 import { FC } from "react"
 import PostPreview from "../../components/posts/post-preview"
 import { sanityClint } from "../../sanity"
@@ -38,27 +39,6 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-	//const query = `*[_type == "post" && slug.current == $slug][0]{
-	//  _id,
-	//  _createdAt,
-	//  title,
-	//  author-> {
-	//    name,
-	//    image
-	//  },
-	//  'comments': *[
-	//    _type == "comment" &&
-	//    post._ref == ^._id &&
-	//    approved == true
-	//  ],
-	//  description,
-	//  mainImage,
-	//  slug,
-	//  body
-	//}`
-	//const post = sanityClint.fetch(query, {
-	//	slug: "kingdom",
-	//})
 	const query = `*[_type == "post" && slug.current == $slug][0]{
 		_id,
 		_createdAt,
@@ -69,7 +49,29 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 			name,
 			email,
 			image,
-			imglink
+			imglink,
+			'posts': *[
+				_type == "post" && 
+				author._ref == ^._id
+			]{
+				_id,
+				_createdAt,
+				title,
+				description,
+				mainImage,
+				author-> {
+					name,
+					email,
+					image,
+					imglink,
+					slug
+				},
+				slug,
+				body,
+				category-> {
+					title
+				}
+			},
 		},
 		slug,
 		body,
@@ -78,7 +80,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	    _type == "comment" &&
 	    post._ref == ^._id &&
 	    approved == true
-	  ],
+	  ]{
+			_createdAt,
+			comment,
+			author-> {
+				name,
+				imglink
+			}
+		},
 		category-> {
 			title
 		}

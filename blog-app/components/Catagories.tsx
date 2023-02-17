@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 import { NextPage } from "next"
 import Link from "next/link"
 import { category } from "../typing"
-
+import s from "./categories.module.css"
 interface Props {
 	catagories: category[]
 }
@@ -22,11 +22,11 @@ const Catagories: NextPage<Props> = ({ catagories }) => {
 					<div className="w-[25%] group-hover:w-[70%] duration-150 rounded full bg-green-500" />
 				</div>
 			</div>
-			<div className="pb-5 overflow-y-scroll h-[290px]">
+			<div className={`pb-5 overflow-y-scroll h-[290px] ${s.catagoriesBox}`}>
 				{catagories.map((e) => (
 					<div
 						key={e.title}
-						className="mb-2"
+						className="mb-2 mr-2"
 					>
 						<h2 className="text-[23px] font-medium">{e.title}</h2>
 						{e.posts.map((post) => (
@@ -35,7 +35,7 @@ const Catagories: NextPage<Props> = ({ catagories }) => {
 								key={post.title}
 							>
 								<p className="text-xs mb-2 ml-2 hover:underline text-gray-100">
-									{post.title}
+									- {post.title}
 								</p>
 							</Link>
 						))}

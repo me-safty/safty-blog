@@ -22,13 +22,17 @@ export default async function createComment(
 	res: NextApiResponse<Data>
 ) {
 	if (req.method === "POST") {
-		const { _id, name, email, comment } = JSON.parse(req.body)
+		const { _id, name, email, comment, userId } = JSON.parse(req.body)
 		try {
 			await sanityClint.create({
 				_type: "comment",
 				post: {
 					_type: "reference",
 					_ref: _id,
+				},
+				author: {
+					_type: "reference",
+					_ref: userId,
 				},
 				name,
 				email,

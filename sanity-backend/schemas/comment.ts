@@ -32,6 +32,12 @@ export default defineType({
       type: 'reference',
       to: {type: 'post'},
     }),
+    defineField({
+      name: 'author',
+      title: 'Author',
+      type: 'reference',
+      to: {type: 'author'},
+    }),
   ],
   preview: {
     select: {

@@ -1,0 +1,9 @@
+.catagoriesBox::-webkit-scrollbar-thumb {
+	border-radius: 20px;
+	background-color: rgb(227, 227, 227);
+}
+.catagoriesBox::-webkit-scrollbar {
+	width: 0.5rem;
+	background-color: #33333341;
+	border-radius: 20px;
+}

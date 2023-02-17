@@ -40,9 +40,29 @@ const PostBox: FC<PostBoxProps> = ({ post }) => {
 						<div className="w-[15%] group-hover:w-[70%] duration-150 rounded full bg-fuchsia-500"></div>
 					</div>
 				</div>
-				<h3 className="font-semibold text-lg my-3">{post.title}</h3>
-				<p className="text-sm">{post.description}</p>
-				{/*<Link href={`/users/${post.author.slug.current}`}>
+				<h3
+					className="font-semibold text-lg my-3 overflow-hidden"
+					style={{
+						height: "calc(2 * 1rem * 1.75)",
+						display: "-webkit-box",
+						WebkitBoxOrient: "vertical",
+						WebkitLineClamp: "2",
+					}}
+				>
+					{post.title}
+				</h3>
+				<p
+					className="text-sm overflow-hidden"
+					style={{
+						height: "calc(3 * 1rem * 1.25)",
+						display: "-webkit-box",
+						WebkitBoxOrient: "vertical",
+						WebkitLineClamp: "3",
+					}}
+				>
+					{post.description}
+				</p>
+				<Link href={`/users/${post.author.slug.current}`}>
 					<div className="flex gap-5 mt-5">
 						<Image
 							width={44}
@@ -65,7 +85,7 @@ const PostBox: FC<PostBoxProps> = ({ post }) => {
 							</p>
 						</div>
 					</div>
-				</Link>*/}
+				</Link>
 			</div>
 		</div>
 	)

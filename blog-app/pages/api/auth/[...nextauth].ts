@@ -58,6 +58,25 @@ export const authOptions: AuthOptions = {
 				return false
 			}
 		},
+		async session({ session }) {
+			// Send properties to the client, like an access_token and user id from a provider.
+			try {
+				const query = `*[_type == "author" && email == $email][0]{
+					_id,
+					name,
+					email,
+				}`
+				const author = await sanityClint.fetch(query, {
+					email: session.user?.email,
+				})
+				//@ts-ignore
+				session.user.id = author._id
+				return session
+			} catch (error) {
+				console.log(error)
+			}
+			return session
+		},
 	},
 }
 
