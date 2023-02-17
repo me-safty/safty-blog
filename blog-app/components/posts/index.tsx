@@ -1,5 +1,4 @@
 import { motion } from "framer-motion"
-import Link from "next/link"
 import React, { FC } from "react"
 import { Post } from "../../typing"
 import ExpandBoxPost from "./expand-post-box"

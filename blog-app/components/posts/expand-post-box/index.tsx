@@ -17,7 +17,7 @@ const ExpandBoxPost: FC<ExpandBoxPostProps> = ({ post }) => {
 			transition={{ duration: 0.2 }}
 			className="group my-[50px] flex"
 		>
-			<Link href={post.slug.current}>
+			<Link href={`/posts/${post.slug.current}`}>
 				<motion.div
 					initial={{ scale: 0.9, opacity: 0 }}
 					animate={{ scale: 1, opacity: 1 }}
