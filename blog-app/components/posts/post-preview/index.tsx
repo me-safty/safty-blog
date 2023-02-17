@@ -5,7 +5,7 @@ import { urlFor } from "../../../sanity"
 import PortableText from "react-portable-text"
 import Image from "next/image"
 import dynamic from "next/dynamic"
-import { useSession } from "next-auth/react"
+import { signIn, useSession } from "next-auth/react"
 import Posts from ".."
 import Link from "next/link"
 const MarkdownMarkdown = dynamic(
@@ -187,7 +187,16 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 							</div>
 						</form>
 					) : (
-						"register"
+						<div className="text-center p-5 rounded-xl text-xl mt-5 bg-green-600 text-white">
+							you need to{" "}
+							<span
+								onClick={() => signIn()}
+								className="underline cursor-pointer  font-medium"
+							>
+								sign in
+							</span>{" "}
+							first to comment
+						</div>
 					)}
 				</div>
 				<div className="p-10 rounded-xl shadow-md shadow-gray-300 mx-6 my-10 bg-orange-300">

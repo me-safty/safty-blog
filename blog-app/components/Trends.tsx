@@ -8,6 +8,9 @@ export interface Props {
 	posts: Post[]
 }
 const Trends: NextPage<Props> = ({ posts }) => {
+	const topPosts = posts
+		.sort((a, b) => b.comments.length - a.comments.length)
+		.slice(0, 3)
 	return (
 		<motion.div
 			initial={{ x: -100, opacity: 0 }}
@@ -23,33 +26,43 @@ const Trends: NextPage<Props> = ({ posts }) => {
 				</div>
 			</div>
 			<div className="mt-3 flex flex-col gap-3 relative z-1">
-				{posts.map((post, i) => (
-					<Link
-						href={`posts/${post.slug.current}`}
+				{topPosts.map((post, i) => (
+					<div
 						key={post.title}
+						className="flex gap-4 text-zinc-700 bg-zinc-50 bg-opacity-30 rounded-xl p-[5.3px] px-3 group/2 hover:items-center hover:gap-2 duration-150"
 					>
-						<div className="flex gap-4 text-zinc-700 bg-zinc-50 bg-opacity-30 rounded-xl p-[5.3px] px-3 group/2 hover:items-center hover:gap-2 duration-150">
+						<Link href={`posts/${post.slug.current}`}>
 							<p className="text-white text-3xl group-hover/2:text-5xl duration-150 font-medium opacity-80">
 								0{i + 1}
 							</p>
-							<div className="mt-2">
-								<Link href={`/users/${post.author.slug.current}`}>
-									<div className="flex gap-2 items-center">
-										<Image
-											src={
-												post.author.imglink
-													? post.author.imglink
-													: urlFor(post.author.image).url()
-											}
-											alt={post.title}
-											width={23}
-											height={23}
-											className="w-[23px] h-[23px] object-cover rounded-full"
-										/>
-										<h2 className="text-sm">{post.author.name}</h2>
-									</div>
-								</Link>
-								<h1 className=" font-medium text-xl my-1 group-hover/2:underline">
+						</Link>
+						<div className="mt-2">
+							<Link href={`/users/${post.author.slug.current}`}>
+								<div className="flex gap-2 items-center">
+									<Image
+										src={
+											post.author.imglink
+												? post.author.imglink
+												: urlFor(post.author.image).url()
+										}
+										alt={post.title}
+										width={23}
+										height={23}
+										className="w-[23px] h-[23px] object-cover rounded-full"
+									/>
+									<h2 className="text-sm">{post.author.name}</h2>
+								</div>
+							</Link>
+							<Link href={`posts/${post.slug.current}`}>
+								<h1
+									className="font-medium overflow-hidden text-xl my-1 group-hover/2:underline"
+									style={{
+										height: "calc(1 * 1rem * 1.75)",
+										display: "-webkit-box",
+										WebkitBoxOrient: "vertical",
+										WebkitLineClamp: "1",
+									}}
+								>
 									{post.title}
 								</h1>
 								<div className="flex items-center gap-3">
@@ -57,9 +70,9 @@ const Trends: NextPage<Props> = ({ posts }) => {
 										{new Date(post._createdAt).toDateString()}
 									</p>
 								</div>
-							</div>
+							</Link>
 						</div>
-					</Link>
+					</div>
 				))}
 			</div>
 		</motion.div>

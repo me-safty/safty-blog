@@ -10,7 +10,6 @@ export interface ExpandBoxPostProps {
 }
 
 const ExpandBoxPost: FC<ExpandBoxPostProps> = ({ post }) => {
-	console.log(post)
 	return (
 		<motion.div
 			whileHover={{ scale: 1.01 }}

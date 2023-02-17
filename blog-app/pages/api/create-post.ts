@@ -50,7 +50,6 @@ export default async function createPost(
 					},
 				},
 			})
-			console.log(req.body)
 		} catch (error) {
 			console.log(error)
 			return res.status(500).json({ message: "Could't create the blog", error })

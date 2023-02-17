@@ -22,7 +22,7 @@ const Home: NextPage<Props> = ({ posts, catagories }) => {
 			</Head>
 			<Landing
 				catagories={catagories}
-				posts={posts.slice(1, 4)}
+				posts={posts}
 			/>
 			<Posts posts={posts} />
 		</>
@@ -48,6 +48,17 @@ export const getStaticProps = async () => {
     slug,
 		category-> {
 			title
+		},
+		'comments': *[
+	    _type == "comment" &&
+	    post._ref == ^._id
+	  ]{
+			_createdAt,
+			comment,
+			author-> {
+				name,
+				imglink
+			}
 		}
   }`
 	const posts = await sanityClint.fetch(query)
