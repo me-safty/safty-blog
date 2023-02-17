@@ -153,13 +153,16 @@ const User = ({ author }: userProps) => {
 				</p>
 				<div className="w-full h-[1px] bg-gray-300 ml-3 my-2"></div>
 				<div>
-					{author.posts ? (
+					{!author.posts.length && (
+						<p className="font-medium text-2xl ml-3 my-10 h-[40vh]">
+							No Blogs yet!
+						</p>
+					)}
+					{author.posts && (
 						<Posts
 							posts={author.posts}
 							showDeferentFirstBlog={false}
 						/>
-					) : (
-						<p>no posts yet</p>
 					)}
 				</div>
 			</div>

@@ -21,6 +21,7 @@ const Posts: FC<PostsProps> = ({ posts, showDeferentFirstBlog = true }) => {
 						whileInView={{ y: 0, opacity: 1 }}
 						whileTap={{ scale: 0.97 }}
 						transition={{ duration: 0.2, delay: i / 10 }}
+						key={post._id}
 					>
 						<PostBox post={post} />
 					</motion.div>

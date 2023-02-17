@@ -7,6 +7,7 @@ import Image from "next/image"
 import dynamic from "next/dynamic"
 import { useSession } from "next-auth/react"
 import Posts from ".."
+import Link from "next/link"
 const MarkdownMarkdown = dynamic(
 	() =>
 		import("@uiw/react-md-editor").then((mod) => {
@@ -30,6 +31,7 @@ interface PostPreviewProps {
 const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 	const { data: session } = useSession()
 	const { register, handleSubmit } = useForm<IFormProps>()
+	const authorBlogs = post.author.posts.filter((blog) => post._id !== blog._id)
 	const onSubmit: SubmitHandler<IFormProps> = async (data) => {
 		if (session) {
 			try {
@@ -64,26 +66,37 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 							<div className="w-[20%] group-hover:w-[70%] duration-150 rounded full bg-fuchsia-500"></div>
 						</div>
 					</div>
-					<div className="">
-						<div className="mb-5">comments : 10 likes: 100</div>
-						<div className="flex items-center gap-3">
-							<Image
-								src={
-									post.author.imglink
-										? post.author.imglink
-										: urlFor(post.author.image).url()
-								}
-								alt="author image"
-								width={48}
-								height={48}
-								className="w-12 h-12 rounded-full object-cover min-w-[3rem]"
-							/>
-							<div className="">
-								<p className="text-white font-medium">{post.author.name}</p>
-								<p className="text-gray-200 text-sm">
-									{new Date(post._createdAt).toLocaleString()}
-								</p>
+					<div>
+						<Link href={`/users/${post.author.slug?.current}`}>
+							<div className="flex items-center gap-3">
+								<Image
+									src={
+										post.author.imglink
+											? post.author.imglink
+											: urlFor(post.author.image).url()
+									}
+									alt="author image"
+									width={48}
+									height={48}
+									className="w-14 h-14 rounded-full object-cover min-w-[3rem]"
+								/>
+								<div>
+									<p className="text-white font-medium text-xl">
+										{post.author.name}
+									</p>
+									<p className="text-gray-200">
+										{new Date(post._createdAt).toLocaleString()}
+									</p>
+								</div>
 							</div>
+						</Link>
+						<div className=" mt-2 text-center text-orange-300 font-medium text-xl">
+							<p>
+								comments:{" "}
+								<span className=" text-fuchsia-500">
+									{post.comments.length}
+								</span>
+							</p>
 						</div>
 					</div>
 				</div>
@@ -111,11 +124,8 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 								}}
 							/>
 						) : (
-							<div className="">
-								<MarkdownMarkdown
-									source={post.mdbody}
-									//style={{ whiteSpace: "pre-wrap" }}
-								/>
+							<div>
+								<MarkdownMarkdown source={post.mdbody} />
 							</div>
 						)}
 					</div>
@@ -124,17 +134,17 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 					<>
 						<hr className=" border border-orange-300 mx-auto max-w-5xl my-10" />
 						<h1 className="text-3xl font-semibold px-6 mb-5">
-							Posts From the Author
+							Blogs From the Author
 						</h1>
-						<div className="">
+						<div>
 							<Posts
-								posts={post.author.posts.slice(0, 3)}
+								posts={authorBlogs.slice(0, 3)}
 								showDeferentFirstBlog={false}
 							/>
 						</div>
 					</>
 				)}
-				<hr className=" border border-orange-300 mx-auto max-w-5xl my-10" />
+				<hr className=" border border-orange-300 mx-auto max-w-5xl mb-10 mt-5" />
 				<div className="mx-auto max-w-5xl">
 					<p className="text-orange-300">Enjoyed this article?</p>
 					<h1 className="text-3xl font-bold">Leave a comment below!</h1>
@@ -144,40 +154,6 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 							className="my-5"
 							onSubmit={handleSubmit(onSubmit)}
 						>
-							{/*<input
-										{...register("_id")}
-										type="hidden"
-										name="_id"
-										value={post._id}
-									/>
-									<label
-									htmlFor="name"
-										className="block mb-1"
-									>
-										Name
-									</label>
-									<input
-										{...register("name", { required: true })}
-										type="text"
-										name="name"
-										id="name"
-										className="w-full rounded outline-none border border-gray-300 py-2 px-3 mb-2 shadow focus:shadow-lg duration-300"
-										placeholder="Your name"
-									/>
-									<label
-										htmlFor="email"
-										className="block mb-1"
-									>
-										Email
-									</label>
-									<input
-										{...register("email", { required: true })}
-										type="email"
-										name="email"
-										id="email"
-										placeholder="example@email.com"
-										className="w-full rounded outline-none border border-gray-300 py-2 px-3 mb-2 shadow focus:shadow-lg duration-300"
-									/>*/}
 							<div className="flex gap-3 items-center">
 								<input
 									{...register("_id")}
@@ -213,14 +189,6 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 					) : (
 						"register"
 					)}
-					{/*<div className="flex items-center justify-center w-[50%]">
-								<Image
-									width={400}
-									height={400}
-									src={join}
-									alt="leave a comment"
-								/>
-							</div>*/}
 				</div>
 				<div className="p-10 rounded-xl shadow-md shadow-gray-300 mx-6 my-10 bg-orange-300">
 					<h1 className="text-3xl font-semibold text-gray-800">Comments</h1>

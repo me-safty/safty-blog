@@ -1,4 +1,4 @@
-import { GetServerSideProps, GetStaticProps, NextPageContext } from "next"
+import { GetServerSideProps } from "next"
 import { getServerSession } from "next-auth"
 import { FC } from "react"
 import BlogForm from "../components/BlogForm"

@@ -50,6 +50,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 			email,
 			image,
 			imglink,
+			slug,
 			'posts': *[
 				_type == "post" && 
 				author._ref == ^._id
@@ -103,6 +104,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		props: {
 			post: post,
 		},
-		revalidate: 60,
+		revalidate: 1,
 	}
 }
