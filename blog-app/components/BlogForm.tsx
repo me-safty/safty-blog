@@ -73,7 +73,6 @@ const BlogForm = ({ author, categories }: BlogFormProps) => {
 					.upload("image", file as File)
 					.then((imageAsset) => {
 						data.imageId = imageAsset._id as string
-						console.log(imageAsset)
 					})
 				data.categoryId = selectedCategoryId
 				data.mdbody = mdValue as string

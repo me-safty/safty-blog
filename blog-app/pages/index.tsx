@@ -1,9 +1,9 @@
 import type { NextPage } from "next"
 import { sanityClint } from "../sanity"
-import { Author, category, Post } from "../typing"
+import { category, Post } from "../typing"
 import Head from "next/head"
 import Posts from "../components/posts"
-import Landing from "../components/Landing"
+import Landing from "../components/landing"
 
 interface Props {
 	posts: Post[]

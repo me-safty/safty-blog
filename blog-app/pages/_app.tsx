@@ -1,6 +1,6 @@
 import "../styles/globals.css"
 import type { AppProps } from "next/app"
-import Footer from "../components/Footer"
+import Footer from "../components/footer"
 import { SessionProvider } from "next-auth/react"
 import Header from "../components/header"
 //import { AnimatePresence } from "framer-motion"

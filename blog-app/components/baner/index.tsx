@@ -41,19 +41,21 @@ const Baner = ({
 				initial={{ scale: 0.95, opacity: 0 }}
 				animate={{ scale: 1, opacity: 1 }}
 				transition={{ duration: 0.5 }}
-				className="rounded-xl overflow-hidden bg-green-600 flex items-center justify-center h-[180px] relative"
+				className="rounded-xl overflow-hidden bg-green-600 flex items-center justify-center h-[160px] sm:h-[180px] relative"
 			>
-				<h1 className="flex items-center justify-center gap-2 relative text-4xl tracking-wide text-white font-light">
+				<h1 className="flex flex-col sm:flex-row items-center justify-center gap-2 relative text-2xl sm:text-4xl tracking-wide text-white font-light">
 					{firstTitle}
-					<span className="text-[40px] font-medium uns">{secondTitle}</span>
-					<div className="h-[3.5px] rounded-lg w-[80px] bg-orange-300 absolute -bottom-2 -left-3" />
-					<div className="w-5 h-5 rounded-full border-[5px] border-fuchsia-500 absolute -top-1 -right-7" />
+					<span className="text-2xl sm:text-[40px] font-medium uns">
+						{secondTitle}
+					</span>
+					<div className="h-[3.5px] rounded-lg w-12 sm:w-[80px] bg-orange-300 absolute -bottom-[2px] sm:-bottom-2 left-3 sm:-left-3" />
+					<div className="w-3 h-3 sm:w-5 sm:h-5 rounded-full border-4 sm:border-[5px] border-fuchsia-500 absolute top-9 sm:-top-1 right-2 sm:-right-7" />
 				</h1>
 				<motion.div
 					animate={{ y: 1, opacity: 1 }}
 					initial={{ y: -100, opacity: 0 }}
 					transition={{ duration: 0.3 }}
-					className="w-[120px] p-4 rounded-md bg-white bg-opacity-30 absolute top-[45px] left-[70px]"
+					className="w-[120px] p-4 rounded-md bg-white bg-opacity-30 absolute top-[45px] lg:block hidden left-[70px]"
 				>
 					<div className="h-[3px] rounded-lg w-full bg-white mb-[6px]" />
 					<div className="h-[3px] rounded-lg w-[60%] bg-white" />
@@ -62,7 +64,7 @@ const Baner = ({
 					animate={{ y: 1, opacity: 1 }}
 					initial={{ y: -100, opacity: 0 }}
 					transition={{ duration: 0.3, delay: 0.1 }}
-					className="w-[100px] p-4 rounded-md bg-white bg-opacity-30 absolute top-[105px] left-[150px]"
+					className="w-[100px] p-4 rounded-md bg-white bg-opacity-30 absolute top-[105px] left-[120px] xl:left-[150px] lg:block hidden"
 				>
 					<div className="h-[3px] rounded-lg w-full bg-white" />
 				</motion.div>
@@ -72,7 +74,7 @@ const Baner = ({
 					src={brush.src}
 					alt="bg"
 					priority
-					className="w-full absolute z-0 opacity-30 bottom-0 right-[-755px]"
+					className="w-full absolute z-0 opacity-30 bottom-0 right-[-755px] lg:block hidden"
 				/>
 			</motion.div>
 		</div>

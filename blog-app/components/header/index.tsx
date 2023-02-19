@@ -39,7 +39,7 @@ const Header = () => {
 			<div className="container flex justify-between relative items-center">
 				<div className="flex items-center justify-center gap-6">
 					<Link href="/">
-						<h1 className="font-bold text-xl md:text-[26px] cursor-pointer relative">
+						<h1 className="font-bold text-[22px] md:text-[26px] cursor-pointer relative">
 							Safty Blog
 							<div className="h-[3.5px] rounded-lg w-[40px] bg-orange-300 absolute -bottom-1 -left-1" />
 							<div className="w-3 h-3 rounded-full border-[3.4px] border-fuchsia-500 absolute top-0 -right-4" />
@@ -64,7 +64,7 @@ const Header = () => {
 					>
 						<button
 							//className="py-1 px-3 border text-base border-green-600 text-green-600 rounded-full cursor-pointer duration-150 hover:bg-green-600 hover:text-white"
-							className="text-green-600 cursor-pointer duration-15 hover:text-black"
+							className="hidden sm:block text-green-600 cursor-pointer duration-15 hover:text-black"
 							onClick={() => signOut()}
 						>
 							Sign Out
@@ -73,11 +73,18 @@ const Header = () => {
 							href={`/users/${
 								session.user?.email?.toLowerCase().split("@")[0]
 							}`}
-							className="flex items-center gap-2 group/1"
+							className="flex items-center gap-2"
 						>
-							<p className="text-lg group-hover/1:text-green-600 duration-150">
-								{session.user?.name}
-							</p>
+							<div className="text-end">
+								<p className="sm:text-lg duration-150">{session.user?.name}</p>
+								<button
+									//className="py-1 px-3 border text-base border-green-600 text-green-600 rounded-full cursor-pointer duration-150 hover:bg-green-600 hover:text-white"
+									className="text-[15px] sm:hidden text-green-600 cursor-pointer duration-15 hover:text-black"
+									onClick={() => signOut()}
+								>
+									Sign Out
+								</button>
+							</div>
 							<Image
 								alt="user image"
 								src={session.user?.image as string}
@@ -90,12 +97,12 @@ const Header = () => {
 					</div>
 				) : (
 					<div className="text-xs md:text-base flex items-center justify-center gap-2 md:gap-5 text-green-600">
-						<button className="cursor-pointer hover:text-black duration-300">
+						{/*<button className="cursor-pointer hover:text-black duration-300">
 							Sign in
-						</button>
+						</button>*/}
 						<button
 							onClick={() => signIn()}
-							className="cursor-pointer border border-green-600 rounded-full px-2 md:px-4 py-1 hover:bg-green-600 hover:text-white duration-300"
+							className="cursor-pointer border border-green-600 rounded-full text-[15px] px-4 py-2 hover:bg-green-600 hover:text-white duration-300"
 						>
 							Get Started
 						</button>

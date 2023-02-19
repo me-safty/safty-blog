@@ -1,7 +1,7 @@
 import { NextPage } from "next"
-import { Post } from "../typing"
+import { Post } from "../../typing"
 import Image from "next/image"
-import { urlFor } from "../sanity"
+import { urlFor } from "../../sanity"
 import Link from "next/link"
 import { motion } from "framer-motion"
 export interface Props {
@@ -16,7 +16,7 @@ const Trends: NextPage<Props> = ({ posts }) => {
 			initial={{ x: -100, opacity: 0 }}
 			animate={{ x: 0, opacity: 1 }}
 			transition={{ duration: 0.5 }}
-			className="w-[70%] p-8 rounded-xl bg-orange-300 group relative"
+			className="p-8 rounded-xl bg-orange-300 group relative"
 		>
 			<div>
 				<h1 className="text-3xl font-medium mb-1 text-white">Trending</h1>
@@ -29,10 +29,10 @@ const Trends: NextPage<Props> = ({ posts }) => {
 				{topPosts.map((post, i) => (
 					<div
 						key={post.title}
-						className="flex gap-4 text-zinc-700 bg-zinc-50 bg-opacity-30 rounded-xl p-[5.3px] px-3 group/2 hover:items-center hover:gap-2 duration-150"
+						className="flex gap-2 sm:gap-4 text-zinc-700 bg-zinc-50 bg-opacity-30 rounded-xl p-[5.3px] px-3 group/2 hover:items-center hover:gap-2 duration-150"
 					>
 						<Link href={`posts/${post.slug.current}`}>
-							<p className="text-white text-3xl group-hover/2:text-5xl duration-150 font-medium opacity-80">
+							<p className="text-white text-2xl sm:text-3xl group-hover/2:text-5xl duration-150 font-medium opacity-80">
 								0{i + 1}
 							</p>
 						</Link>
@@ -55,9 +55,9 @@ const Trends: NextPage<Props> = ({ posts }) => {
 							</Link>
 							<Link href={`posts/${post.slug.current}`}>
 								<h1
-									className="font-medium overflow-hidden text-xl my-1 group-hover/2:underline"
+									className="font-medium overflow-hidden sm:text-xl my-1 group-hover/2:underline"
 									style={{
-										height: "calc(1 * 1rem * 1.75)",
+										//height: "calc(1 * 1rem * 1.75)",
 										display: "-webkit-box",
 										WebkitBoxOrient: "vertical",
 										WebkitLineClamp: "1",
