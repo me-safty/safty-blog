@@ -213,16 +213,20 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 								className="flex items-center gap-3 bg-zinc-50 bg-opacity-30 rounded-xl py-3 px-5"
 								key={comment._id}
 							>
-								<Image
-									src={comment.author.imglink as string}
-									alt="author image"
-									width={48}
-									height={48}
-									className="w-12 h-12 rounded-full object-cover"
-								/>
+								<Link href={`/users/${comment.author.slug.current}`}>
+									<Image
+										src={comment.author.imglink as string}
+										alt="author image"
+										width={48}
+										height={48}
+										className="w-12 h-12 rounded-full object-cover"
+									/>
+								</Link>
 								<div>
 									<h2 className="text-xl font-medium flex items-center gap-1">
-										{comment.author.name}{" "}
+										<Link href={`/users/${comment.author.slug.current}`}>
+											{comment.author.name}{" "}
+										</Link>
 										<span className="text-sm text-gray-700">
 											{new Date(comment._createdAt).toLocaleString()}
 										</span>

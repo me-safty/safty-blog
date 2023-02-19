@@ -43,13 +43,13 @@ const Baner = ({
 				transition={{ duration: 0.5 }}
 				className="rounded-xl overflow-hidden bg-green-600 flex items-center justify-center h-[160px] sm:h-[180px] relative"
 			>
-				<h1 className="flex flex-col sm:flex-row items-center justify-center gap-2 relative text-2xl sm:text-4xl tracking-wide text-white font-light">
+				<h1 className="flex flex-col sm:flex-row items-center justify-center gap-2 relative text-3xl sm:text-4xl tracking-wide text-white font-light">
 					{firstTitle}
-					<span className="text-2xl sm:text-[40px] font-medium uns">
+					<span className="text-3xl sm:text-[40px] font-medium">
 						{secondTitle}
 					</span>
-					<div className="h-[3.5px] rounded-lg w-12 sm:w-[80px] bg-orange-300 absolute -bottom-[2px] sm:-bottom-2 left-3 sm:-left-3" />
-					<div className="w-3 h-3 sm:w-5 sm:h-5 rounded-full border-4 sm:border-[5px] border-fuchsia-500 absolute top-9 sm:-top-1 right-2 sm:-right-7" />
+					<div className="h-[3.5px] rounded-lg w-14 sm:w-[80px] bg-orange-300 absolute -bottom-[4px] sm:-bottom-2 left-4 sm:-left-3" />
+					<div className="w-3 h-3 sm:w-5 sm:h-5 rounded-full border-4 sm:border-[5px] border-fuchsia-500 absolute top-10 sm:-top-1 right-4 sm:-right-7" />
 				</h1>
 				<motion.div
 					animate={{ y: 1, opacity: 1 }}

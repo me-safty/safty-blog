@@ -3,20 +3,17 @@ import { getServerSession } from "next-auth"
 import { FC } from "react"
 import BlogForm from "../components/BlogForm"
 import { sanityClint } from "../sanity"
-import { Author, category } from "../typing"
+import { category } from "../typing"
 import { authOptions } from "./api/auth/[...nextauth]"
+
 interface userPagePops {
-	author: Author
 	categories: category[]
 }
 
-const PostBlog: FC<userPagePops> = ({ author, categories }) => {
+const PostBlog: FC<userPagePops> = ({ categories }) => {
 	return (
 		<main>
-			<BlogForm
-				author={author}
-				categories={categories}
-			/>
+			<BlogForm categories={categories} />
 		</main>
 	)
 }
@@ -33,29 +30,18 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 			},
 		}
 	}
-	const query = `*[_type == "author" && slug.current == $id][0]{
+	const query = `*[_type == "category"]{
 		_id,
-		name,
-		email,
-		imglink,
-		image,
-    "categories": *[_type == "category"]{
-			_id,
-			title,
-		},
+		title,
 	}`
-	const author = await sanityClint.fetch(query, {
-		id: session?.user?.email?.toLowerCase().split("@")[0],
-	})
-	if (!author) {
+	const categories = await sanityClint.fetch(query)
+	if (!categories) {
 		return {
 			notFound: true,
 		}
 	}
-	const categories = author.categories
 	return {
 		props: {
-			author,
 			categories,
 		},
 	}

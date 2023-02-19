@@ -85,7 +85,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 			comment,
 			author-> {
 				name,
-				imglink
+				imglink,
+				slug
 			}
 		},
 		category-> {

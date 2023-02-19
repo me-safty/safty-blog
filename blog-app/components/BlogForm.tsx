@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { Author, category } from "../typing"
+import { category } from "../typing"
 import { useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { createClient } from "next-sanity"
@@ -10,6 +10,7 @@ import dynamic from "next/dynamic"
 import "@uiw/react-md-editor/markdown-editor.css"
 import "@uiw/react-markdown-preview/markdown.css"
 import Baner from "./baner"
+import { useSession } from "next-auth/react"
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false })
 
 interface IFormProps {
@@ -23,7 +24,6 @@ interface IFormProps {
 }
 
 interface BlogFormProps {
-	author: Author
 	categories: category[]
 }
 
@@ -37,7 +37,8 @@ export const sanityConfig = {
 
 const sanityClint = createClient(sanityConfig)
 
-const BlogForm = ({ author, categories }: BlogFormProps) => {
+const BlogForm = ({ categories }: BlogFormProps) => {
+	const { data: session } = useSession()
 	const [selectedCategoryId, setSelectedCategoryId] = useState<string>("")
 	const [mdValue, setMdValue] = useState<string | undefined>("")
 	const [file, setFile] = useState<File>()
@@ -111,7 +112,8 @@ const BlogForm = ({ author, categories }: BlogFormProps) => {
 								{...register("_id")}
 								type="hidden"
 								name="_id"
-								value={author._id}
+								//@ts-ignore
+								value={session?.user?.id}
 							/>
 							<label
 								htmlFor="title"
@@ -161,7 +163,7 @@ const BlogForm = ({ author, categories }: BlogFormProps) => {
 								className="my-3"
 							>
 								<option value="">select category</option>
-								{categories.map((option, index) => {
+								{categories?.map((option, index) => {
 									return (
 										<option
 											key={index}

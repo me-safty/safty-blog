@@ -59,24 +59,24 @@ export const getStaticProps = async () => {
 				name,
 				imglink
 			}
-		}
-  }`
-	const posts = await sanityClint.fetch(query)
-	const categoryQuery = `*[_type == "category"]{
-		_id,
-		title,
-		"posts": *[_type == "post" && references(^._id) ]{
+		},
+		'categories': *[_type == "category"]{
 			_id,
 			title,
-			slug
+			"posts": *[_type == "post" && references(^._id) ]{
+				_id,
+				title,
+				slug
+			},
 		},
-	}`
-	const catagories = await sanityClint.fetch(categoryQuery)
+  }`
+	const posts = await sanityClint.fetch(query)
+	const catagories = posts[0].categories
 	return {
 		props: {
 			posts,
 			catagories,
 		},
-		revalidate: 3600,
+		revalidate: 1,
 	}
 }
