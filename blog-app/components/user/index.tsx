@@ -15,104 +15,6 @@ interface userProps {
 const User = ({ author }: userProps) => {
 	const { data: session } = useSession()
 	const ownProfile = author.email === session?.user?.email
-	//function onFileChange(event) {
-
-	//function blobToBuffer(blob, cb) {
-	//	if (typeof Blob === "undefined" || !(blob instanceof Blob)) {
-	//		throw new Error("first argument must be a Blob")
-	//	}
-	//	if (typeof cb !== "function") {
-	//		throw new Error("second argument must be a function")
-	//	}
-
-	//	const reader = new FileReader()
-
-	//	function onLoadEnd(e) {
-	//		reader.removeEventListener("loadend", onLoadEnd, false)
-	//		if (e.error) cb(e.error)
-	//		else cb(null, Buffer.from(reader.result))
-	//	}
-
-	//	reader.addEventListener("loadend", onLoadEnd, false)
-	//	reader.readAsArrayBuffer(blob)
-	//}
-	//function blobToStream(blob) {
-	//	var rs = new stream.Readable()
-	//	rs._read = function () {}
-
-	//	blobToBuffer(blob, function haveBuffer(e, buffer) {
-	//		if (e) {
-	//			rs.emit("error", e)
-	//			rs.push(null)
-	//		}
-	//		rs.push(buffer)
-	//		rs.push(null)
-	//	})
-
-	//	return rs
-	//}
-	////const obj = { hello: "world" };
-	//const blob = new Blob([JSON.stringify(file, null, 2)], {
-	//	type: "application/json",
-	//})
-
-	//	// Update the state
-	//	this.setState({ selectedFile: event.target.files[0] });
-
-	//};
-	// progress
-	//const [percent, setPercent] = useState<number>(0)
-	//const [link, setLink] = useState<string>("")
-
-	// Handle file upload event and update state
-
-	//console.log(process.env.FIREBASE_STORAGE_BUCKET, process.env.NEXTAUTH_URL)
-	//const handleUpload = () => {
-	//	if (!file) {
-	//		alert("Please upload an image first!")
-	//	}
-	//	const storageRef = ref(storage, `/images/${file?.name}`)
-	//	// progress can be paused and resumed. It also exposes progress updates.
-	//	// Receives the storage reference and the file to upload.
-	//	const uploadTask = uploadBytesResumable(storageRef, file)
-	//	uploadTask.on(
-	//		"state_changed",
-	//		(snapshot) => {
-	//			const percent = Math.round(
-	//				(snapshot.bytesTransferred / snapshot.totalBytes) * 100
-	//			)
-	//			// update progress
-	//			setPercent(percent)
-	//		},
-	//		(err) => console.log(err),
-	//		() => {
-	//			// download url
-	//			getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-	//				console.log(url)
-	//				setLink(url)
-	//			})
-	//		}
-	//	)
-	//}
-
-	// On file upload (click the upload button)
-	//async function onFileUpload() {
-	//	const formData = new FormData()
-	//	formData.append("photo", file as File)
-	//	//formData.append("fileName", file?.name as string)
-	//	try {
-	//		const data = await fetch("/api/upload-api", {
-	//			method: "POST",
-	//			//headers: { "Content-Type": "multipart/form-data" },
-	//			//headers: { "Content-Type": "application/json" },
-	//			body: formData,
-	//		})
-	//		const res = await data.json()
-	//		console.log(res)
-	//	} catch (error) {
-	//		console.log(error)
-	//	}
-	//}
 	return (
 		<>
 			<div className="w-full h-[180px] bg-green-600 relative">
@@ -127,7 +29,7 @@ const User = ({ author }: userProps) => {
 				{ownProfile && (
 					<Link href="/post-blog">
 						<Button
-							title="post a blog"
+							title="write a blog"
 							onClick={() => undefined}
 						/>
 					</Link>

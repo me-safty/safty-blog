@@ -25,7 +25,7 @@ const Landing: NextPage<Props> = ({ catagories, posts }) => {
 						</button>*/}
 						<Button
 							onClick={() => undefined}
-							title="post a blog"
+							title="write a blog"
 						/>
 					</Link>
 				) : (
