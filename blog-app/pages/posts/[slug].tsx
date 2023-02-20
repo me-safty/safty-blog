@@ -1,5 +1,6 @@
 import { GetStaticProps } from "next"
 import { getServerSession } from "next-auth"
+import Head from "next/head"
 import { FC } from "react"
 import PostPreview from "../../components/posts/post-preview"
 import { sanityClint } from "../../sanity"
@@ -11,9 +12,18 @@ interface PostProps {
 
 const PostPage: FC<PostProps> = ({ post }) => {
 	return (
-		<main>
-			<PostPreview post={post} />
-		</main>
+		<>
+			<Head>
+				<title>{post.title}</title>
+				<link
+					rel="icon"
+					href="/favicon.ico"
+				/>
+			</Head>
+			<main>
+				<PostPreview post={post} />
+			</main>
+		</>
 	)
 }
 

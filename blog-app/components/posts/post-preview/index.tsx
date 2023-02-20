@@ -53,16 +53,16 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 	console.log(brush2)
 	return (
 		<div className="relative">
-			<div className=" absolute top-0 left-0 w-full h-[350px] lg:h-[300px] bg-green-700" />
+			<div className=" absolute top-0 left-0 w-full h-[420px] lg:h-[300px] bg-green-700" />
 			<div className="container relative">
 				<div className="flex lg:items-center flex-col lg:flex-row lg:gap-32 py-8 lg:py-12 px-5 group relative overflow-hidden">
-					{/*<Image
+					<Image
 						src={brush2.src}
 						width={brush2.width}
 						height={brush2.height}
 						alt="bg image"
-						className="absolute -top-10 -left-3 opacity-20"
-					/>*/}
+						className="absolute -top-10 -left-3 opacity-10 hidden lg:block"
+					/>
 					<div className="lg:w-[56%] relative">
 						<p className=" text-orange-300 font-medium text-lg">
 							{post.category.title}
@@ -113,7 +113,7 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 					alt={post.title}
 					width={900}
 					height={600}
-					className="w-full h-[450px] lg:h-[600px] rounded-3xl object-cover"
+					className="w-full h-[260px] sm:h-[450px] lg:h-[600px] rounded-3xl object-cover"
 					src={urlFor(post.mainImage).url()}
 				/>
 				<article className="px-3">
@@ -142,7 +142,7 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 				{post.author.posts.length && (
 					<>
 						<hr className=" border border-orange-300 mx-auto max-w-5xl my-10" />
-						<h1 className="text-3xl font-semibold px-6 mb-5">
+						<h1 className="text-2xl sm:text-3xl font-semibold px-6 mb-5">
 							Blogs From the Author
 						</h1>
 						<div>
@@ -156,7 +156,9 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 				<hr className=" border border-orange-300 mx-auto max-w-5xl mb-10 mt-5" />
 				<div className="mx-auto max-w-5xl">
 					<p className="text-orange-300">Enjoyed this article?</p>
-					<h1 className="text-3xl font-bold">Leave a comment below!</h1>
+					<h1 className="text-2xl sm:text-3xl font-bold">
+						Leave a comment below!
+					</h1>
 					<hr className="mt-1" />
 					{session ? (
 						<form
@@ -177,7 +179,7 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 									height={48}
 									className="w-12 h-12 rounded-full object-cover min-w-[3rem]"
 								/>
-								<div className="rounded-3xl w-full outline-none border border-gray-300 p-2 shadow focus:shadow-lg duration-300 flex">
+								<div className="rounded-3xl w-full outline-none border border-gray-300 p-2 shadow focus:shadow-lg duration-300 flex flex-col sm:flex-row">
 									<input
 										{...register("comment", { required: true })}
 										type="text"
@@ -185,7 +187,7 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 										id="comment"
 										required
 										placeholder="write your comment."
-										className="w-full outline-none p-1"
+										className="w-full outline-none p-1 h-10 sm:h-fit"
 									/>
 									<input
 										type="submit"
@@ -208,7 +210,7 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 						</div>
 					)}
 				</div>
-				<div className="p-10 rounded-xl shadow-md shadow-gray-300 mx-6 my-10 bg-orange-300">
+				<div className="p-3 py-5 sm:p-10  rounded-xl shadow-md shadow-gray-300 sm:mx-6 my-10 bg-orange-300">
 					<h1 className="text-3xl font-semibold text-gray-800">Comments</h1>
 					<hr className="mt-1 text-gray-800" />
 					<div className="mt-5 space-y-4">
@@ -219,7 +221,7 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 						)}
 						{post.comments.map((comment) => (
 							<div
-								className="flex items-center gap-3 bg-zinc-50 bg-opacity-30 rounded-xl py-3 px-5"
+								className="flex gap-3 bg-zinc-50 bg-opacity-30 rounded-xl px-3 py-3 sm:px-5"
 								key={comment._id}
 							>
 								<Link href={`/users/${comment.author.slug.current}`}>
@@ -228,19 +230,19 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 										alt="author image"
 										width={48}
 										height={48}
-										className="w-12 h-12 rounded-full object-cover"
+										className="min-w-[48px] h-12 rounded-full object-cover"
 									/>
 								</Link>
 								<div>
-									<h2 className="text-xl font-medium flex items-center gap-1">
+									<h2 className="text-lg sm:text-xl font-medium flex sm:items-center sm:gap-1 flex-col sm:flex-row">
 										<Link href={`/users/${comment.author.slug.current}`}>
 											{comment.author.name}{" "}
 										</Link>
-										<span className="text-sm text-gray-700">
+										<span className="text-xs sm:text-sm text-gray-700">
 											{new Date(comment._createdAt).toLocaleString()}
 										</span>
 									</h2>
-									<p className="text-lg text-gray-700">{comment.comment}</p>
+									<p className="sm:text-lg mt-1 sm:mt-0">{comment.comment}</p>
 								</div>
 							</div>
 						))}

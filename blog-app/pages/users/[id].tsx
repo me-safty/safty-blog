@@ -1,6 +1,7 @@
 import { GetStaticProps } from "next"
+import Head from "next/head"
 import { FC } from "react"
-import User from "../../components/User"
+import User from "../../components/user"
 import { sanityClint } from "../../sanity"
 import { Author } from "../../typing"
 
@@ -10,9 +11,18 @@ interface userPagePops {
 
 const UserPage: FC<userPagePops> = ({ author }) => {
 	return (
-		<main>
-			<User author={author} />
-		</main>
+		<>
+			<Head>
+				<title>{author.name}</title>
+				<link
+					rel="icon"
+					href="/favicon.ico"
+				/>
+			</Head>
+			<main>
+				<User author={author} />
+			</main>
+		</>
 	)
 }
 

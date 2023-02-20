@@ -1,11 +1,12 @@
-import { urlFor } from "../sanity"
-import { Author } from "../typing"
+import { urlFor } from "../../sanity"
+import { Author } from "../../typing"
 import Image from "next/image"
-import Baner from "./baner"
-import Posts from "./posts"
-import RightArrow from "./RightArrow"
+import Baner from "../baner"
+import Posts from "../posts"
+import RightArrow from "../RightArrow"
 import { useSession } from "next-auth/react"
 import Link from "next/link"
+import Button from "../button"
 
 interface userProps {
 	author: Author
@@ -125,10 +126,10 @@ const User = ({ author }: userProps) => {
 				/>
 				{ownProfile && (
 					<Link href="/post-blog">
-						<button className="mt-2 absolute bottom-0 left-[50%] -translate-x-[50%] translate-y-[50%] shadow-lg group hover:py-3 hover:px-7 active:py-1 active:px-4 bg-orange-300  hover:brightness-95 duration-150 rounded-full flex items-center px-6 py-2 text-white text-2xl font-medium">
-							post a blog
-							<RightArrow className="h-[23px] w-[23px] ml-2 group-hover:fill-green-600 fill-fuchsia-500 mt-[6px]" />
-						</button>
+						<Button
+							title="post a blog"
+							onClick={() => undefined}
+						/>
 					</Link>
 				)}
 			</div>
@@ -140,11 +141,13 @@ const User = ({ author }: userProps) => {
 							alt="profile image"
 							width={140}
 							height={140}
-							className="rounded-full"
+							className="rounded-full w-[120px] h-[120px] sm:w-[140px] sm:h-[140px]"
 						/>
 						<div>
-							<p className="text-3xl font-medium mb-1">{author.name}</p>
-							{ownProfile && <p className="text-lg">{author.email}</p>}
+							<p className="text-2xl sm:text-3xl font-medium mb-1">
+								{author.name}
+							</p>
+							{ownProfile && <p className="sm:text-lg">{author.email}</p>}
 						</div>
 					</div>
 				</div>

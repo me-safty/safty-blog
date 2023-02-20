@@ -55,7 +55,7 @@ const ExpandBoxPost: FC<ExpandBoxPostProps> = ({ post }) => {
 						</div>
 					</div>
 					<h1
-						className="text-xl lg:text-4xl font-medium my-2 lg:my-3 overflow-hidden"
+						className="text-lg lg:text-4xl font-medium my-2 lg:my-3 overflow-hidden"
 						style={{
 							//height: "calc(2 * 1rem * 2.5)",
 							display: "-webkit-box",

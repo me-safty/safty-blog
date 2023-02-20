@@ -19,6 +19,10 @@ const Home: NextPage<Props> = ({ posts, catagories }) => {
 					rel="icon"
 					href="/favicon.ico"
 				/>
+				<meta
+					name="description"
+					content="Safty Blog is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic."
+				/>
 			</Head>
 			<Landing
 				catagories={catagories}

@@ -1,0 +1,20 @@
+import RightArrow from "../RightArrow"
+
+interface ButtonProps {
+	title: string
+	onClick: () => void
+}
+
+const Button = ({ title, onClick }: ButtonProps) => {
+	return (
+		<button
+			onClick={() => onClick()}
+			className="absolute bottom-0 left-[50%] -translate-x-[50%] translate-y-[50%] shadow-lg group hover:py-3 hover:px-7 active:py-1 active:px-4 bg-orange-300  hover:brightness-95 duration-150 rounded-full flex items-center px-6 py-2 text-white whitespace-nowrap sm:text-2xl font-medium"
+		>
+			{title}
+			<RightArrow className="h-[20px] w-[20px] ml-2 group-hover:fill-green-600 fill-fuchsia-500 mt-[6px]" />
+		</button>
+	)
+}
+
+export default Button

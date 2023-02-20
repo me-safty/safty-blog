@@ -1,7 +1,8 @@
 import { GetServerSideProps } from "next"
 import { getServerSession } from "next-auth"
+import Head from "next/head"
 import { FC } from "react"
-import BlogForm from "../components/BlogForm"
+import BlogForm from "../components/blog-form"
 import { sanityClint } from "../sanity"
 import { category } from "../typing"
 import { authOptions } from "./api/auth/[...nextauth]"
@@ -12,9 +13,18 @@ interface userPagePops {
 
 const PostBlog: FC<userPagePops> = ({ categories }) => {
 	return (
-		<main>
-			<BlogForm categories={categories} />
-		</main>
+		<>
+			<Head>
+				<title>write a blog</title>
+				<link
+					rel="icon"
+					href="/favicon.ico"
+				/>
+			</Head>
+			<main>
+				<BlogForm categories={categories} />
+			</main>
+		</>
 	)
 }
 

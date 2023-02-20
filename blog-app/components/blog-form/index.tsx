@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { category } from "../typing"
+import { category } from "../../typing"
 import { useState } from "react"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { createClient } from "next-sanity"
@@ -9,7 +9,7 @@ import Image from "next/image"
 import dynamic from "next/dynamic"
 import "@uiw/react-md-editor/markdown-editor.css"
 import "@uiw/react-markdown-preview/markdown.css"
-import Baner from "./baner"
+import Baner from "../baner"
 import { useSession } from "next-auth/react"
 const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false })
 
