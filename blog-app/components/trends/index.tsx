@@ -16,7 +16,7 @@ const Trends: NextPage<Props> = ({ posts }) => {
 			initial={{ x: -100, opacity: 0 }}
 			animate={{ x: 0, opacity: 1 }}
 			transition={{ duration: 0.5 }}
-			className="p-8 rounded-xl bg-orange-300 group relative"
+			className="px-4 py-8 sm:p-8 rounded-xl bg-orange-300 group relative"
 		>
 			<div>
 				<h1 className="text-3xl font-medium mb-1 text-white">Trending</h1>

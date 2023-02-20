@@ -13,7 +13,7 @@ const Catagories: NextPage<Props> = ({ catagories }) => {
 			initial={{ x: 100, opacity: 0 }}
 			animate={{ x: 0, opacity: 1 }}
 			transition={{ duration: 0.5, delay: 0.2 }}
-			className="p-8 rounded-xl bg-fuchsia-500 text-white group"
+			className="px-5 py-8 sm:p-8 rounded-xl bg-fuchsia-500 text-white group"
 		>
 			<div className="mb-5">
 				<h1 className="text-3xl font-medium mb-1">Catagories</h1>

@@ -8,6 +8,7 @@ import dynamic from "next/dynamic"
 import { signIn, useSession } from "next-auth/react"
 import Posts from ".."
 import Link from "next/link"
+import brush2 from "../../../public/brush2.png"
 const MarkdownMarkdown = dynamic(
 	() =>
 		import("@uiw/react-md-editor").then((mod) => {
@@ -49,16 +50,24 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 			}
 		}
 	}
+	console.log(brush2)
 	return (
 		<div className="relative">
-			<div className=" absolute top-0 left-0 w-full h-[300px] bg-green-600" />
+			<div className=" absolute top-0 left-0 w-full h-[350px] lg:h-[300px] bg-green-700" />
 			<div className="container relative">
-				<div className="flex items-center gap-32 py-12 px-5 group">
-					<div className="w-[67%]">
+				<div className="flex lg:items-center flex-col lg:flex-row lg:gap-32 py-8 lg:py-12 px-5 group relative overflow-hidden">
+					{/*<Image
+						src={brush2.src}
+						width={brush2.width}
+						height={brush2.height}
+						alt="bg image"
+						className="absolute -top-10 -left-3 opacity-20"
+					/>*/}
+					<div className="lg:w-[56%] relative">
 						<p className=" text-orange-300 font-medium text-lg">
 							{post.category.title}
 						</p>
-						<h1 className="text-3xl mb-2 capitalize text-white font-medium leading-10">
+						<h1 className="text-[26px] lg:text-3xl mb-2 capitalize text-white font-medium leading-10">
 							{post.title}
 						</h1>
 						<div className="flex w-20 h-[5px] gap-1">
@@ -66,9 +75,9 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 							<div className="w-[20%] group-hover:w-[70%] duration-150 rounded full bg-fuchsia-500"></div>
 						</div>
 					</div>
-					<div>
+					<div className="relative">
 						<Link href={`/users/${post.author.slug?.current}`}>
-							<div className="flex items-center gap-3">
+							<div className="flex w-fit items-center gap-3 mt-5 bg-gray-50 bg-opacity-20 p-3 px-4 rounded-xl">
 								<Image
 									src={
 										post.author.imglink
@@ -90,8 +99,8 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 								</div>
 							</div>
 						</Link>
-						<div className=" mt-2 text-center text-orange-300 font-medium text-xl">
-							<p>
+						<div className="mt-3 flex lg:justify-center text-center text-orange-300 font-medium text-xl">
+							<p className="bg-gray-50 bg-opacity-20 px-3 py-1 rounded-xl">
 								comments:{" "}
 								<span className=" text-fuchsia-500">
 									{post.comments.length}
@@ -104,7 +113,7 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 					alt={post.title}
 					width={900}
 					height={600}
-					className="w-full h-[600px] rounded-3xl object-cover"
+					className="w-full h-[450px] lg:h-[600px] rounded-3xl object-cover"
 					src={urlFor(post.mainImage).url()}
 				/>
 				<article className="px-3">

@@ -18,7 +18,10 @@ const Footer = () => {
 						<li>About</li>
 						<li>About</li>
 					</ul>*/}
-					<p className="text-sm">created & designed by Mohamed Safty</p>
+					<p className="text-sm">
+						created & designed by{" "}
+						<span className="underline">Mohamed Safty</span>
+					</p>
 				</div>
 			</div>
 		</footer>
