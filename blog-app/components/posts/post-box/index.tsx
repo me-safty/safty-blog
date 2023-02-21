@@ -37,7 +37,7 @@ const PostBox: FC<PostBoxProps> = ({ post }) => {
 							<div className="w-[15%] group-hover:w-[70%] duration-150 rounded full bg-fuchsia-500"></div>
 						</div>
 					</div>
-					<h3
+					<h1
 						className="font-semibold text-lg my-3 overflow-hidden"
 						style={{
 							height: "calc(2 * 1rem * 1.75)",
@@ -47,7 +47,7 @@ const PostBox: FC<PostBoxProps> = ({ post }) => {
 						}}
 					>
 						{post.title}
-					</h3>
+					</h1>
 					<p
 						className="text-sm overflow-hidden"
 						style={{
