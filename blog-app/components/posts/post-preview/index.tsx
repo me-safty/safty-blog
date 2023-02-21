@@ -50,7 +50,6 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 			}
 		}
 	}
-	console.log(brush2)
 	return (
 		<div className="relative">
 			<div className=" absolute top-0 left-0 w-full h-[420px] lg:h-[300px] bg-green-700" />

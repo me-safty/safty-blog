@@ -54,7 +54,6 @@ export default async function createPost(
 			console.log(error)
 			return res.status(500).json({ message: "Could't create the blog", error })
 		}
-		console.log("blog created")
 		res.status(200).json({ message: "blog created" })
 	} else {
 		res.status(405).json({ error: `Method '${req.method}' Not Allowed` })

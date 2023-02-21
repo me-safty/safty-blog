@@ -87,7 +87,6 @@ const BlogForm = ({ categories }: BlogFormProps) => {
 				console.log(error)
 			}
 		}
-		console.log(data)
 	}
 	return (
 		<div className="bg-gray-50 py-10">
