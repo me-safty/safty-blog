@@ -12,5 +12,5 @@ We hope you enjoy your experience on our blog and thank you for visiting!
 
 ### to run the app
 - clone the repo
-- add the .env.local file as the .env.example file in the repo
+- add the .env.local file as the .env.example file in the repo `./blog-app/.env.example`
 - run `npm run dev` to run the app
