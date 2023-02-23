@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, useState } from "react"
 import { Post } from "../../../typing"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { urlFor } from "../../../sanity"
@@ -32,10 +32,13 @@ interface PostPreviewProps {
 const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 	const { data: session } = useSession()
 	const { register, handleSubmit } = useForm<IFormProps>()
+	const [isClicked, setClick] = useState<boolean>(false)
+
 	const authorBlogs = post.author.posts.filter((blog) => post._id !== blog._id)
 	const onSubmit: SubmitHandler<IFormProps> = async (data) => {
-		if (session) {
+		if (session && isClicked === false) {
 			try {
+				setClick(true)
 				//@ts-ignore
 				data.userId = session?.user?.id as string
 				data.name = session?.user?.name as string
@@ -191,7 +194,12 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 									<input
 										type="submit"
 										value="Submit"
-										className="bg-orange-300 text-white py-1 px-5 rounded-3xl cursor-pointer shadow-md hover:bg-orange-400 duration-300"
+										className={`bg-orange-300 text-white py-1 px-5 rounded-3xl shadow-md ${
+											isClicked ? "" : "hover:bg-orange-400 cursor-pointer"
+										}  duration-300`}
+										style={{
+											opacity: isClicked ? 0.5 : 1,
+										}}
 									/>
 								</div>
 							</div>

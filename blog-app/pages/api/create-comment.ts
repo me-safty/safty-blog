@@ -43,7 +43,6 @@ export default async function createComment(
 				.status(500)
 				.json({ message: "Could't submit the comment", error })
 		}
-		console.log("comment submitted")
 		res.status(200).json({ message: "Comment submitted" })
 	} else {
 		res.status(405).json({ error: `Method '${req.method}' Not Allowed` })

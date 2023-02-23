@@ -44,7 +44,7 @@ const BlogForm = ({ categories }: BlogFormProps) => {
 	const [file, setFile] = useState<File>()
 	const [mdError, setMdError] = useState<boolean>(false)
 	const [notImgError, setNotImgError] = useState<boolean>(false)
-
+	const [isClicked, setClick] = useState<boolean>(false)
 	const router = useRouter()
 
 	useEffect(() => {
@@ -62,29 +62,32 @@ const BlogForm = ({ categories }: BlogFormProps) => {
 	const { register, handleSubmit } = useForm<IFormProps>()
 
 	const onSubmit: SubmitHandler<IFormProps> = async (data) => {
-		if (!selectedCategoryId && !file) {
-			console.error("category and image field empty")
-		} else if (!mdValue) {
-			setMdError(true)
-		} else if (file?.type.slice(0, 5) !== "image") {
-			setNotImgError(true)
-		} else {
-			try {
-				await sanityClint.assets
-					.upload("image", file as File)
-					.then((imageAsset) => {
-						data.imageId = imageAsset._id as string
+		if (isClicked === false) {
+			if (!selectedCategoryId && !file) {
+				console.error("category and image field empty")
+			} else if (!mdValue) {
+				setMdError(true)
+			} else if (file?.type.slice(0, 5) !== "image") {
+				setNotImgError(true)
+			} else {
+				try {
+					setClick(true)
+					await sanityClint.assets
+						.upload("image", file as File)
+						.then((imageAsset) => {
+							data.imageId = imageAsset._id as string
+						})
+					data.categoryId = selectedCategoryId
+					data.mdbody = mdValue as string
+					data.slug = data.title.toLowerCase().split(" ").join("-")
+					await fetch("/api/create-post", {
+						method: "POST",
+						body: JSON.stringify(data),
 					})
-				data.categoryId = selectedCategoryId
-				data.mdbody = mdValue as string
-				data.slug = data.title.toLowerCase().split(" ").join("-")
-				await fetch("/api/create-post", {
-					method: "POST",
-					body: JSON.stringify(data),
-				})
-				router.push(`/posts/${data.slug}`)
-			} catch (error) {
-				console.log(error)
+					router.push(`/posts/${data.slug}`)
+				} catch (error) {
+					console.log(error)
+				}
 			}
 		}
 	}
@@ -231,7 +234,12 @@ const BlogForm = ({ categories }: BlogFormProps) => {
 					<input
 						type="submit"
 						value="Submit"
-						className="bg-green-600 text-white w-full p-2 rounded text-lg cursor-pointer shadow-md hover:bg-green-500 duration-300"
+						className={`bg-green-600 text-white w-full p-2 rounded text-lg shadow-md ${
+							isClicked ? "" : "hover:bg-green-500 cursor-pointer"
+						} duration-300`}
+						style={{
+							opacity: isClicked ? 0.5 : 1,
+						}}
 					/>
 				</form>
 			</motion.div>
