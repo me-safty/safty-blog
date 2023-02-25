@@ -1,6 +1,6 @@
 import Image from "next/image"
 import { FC } from "react"
-import { urlFor } from "../../../sanity"
+import { urlFor } from "../../../utils/sanity"
 import { Post } from "../../../typing"
 import { motion } from "framer-motion"
 import Link from "next/link"

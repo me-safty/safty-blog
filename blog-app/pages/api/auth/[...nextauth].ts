@@ -2,7 +2,7 @@ import NextAuth, { AuthOptions } from "next-auth"
 //import GithubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
 import FacebookProvider from "next-auth/providers/facebook"
-import { sanityClint } from "../../../sanity"
+import { sanityClint } from "../../../utils/sanity"
 import { Author } from "../../../typing"
 
 export const authOptions: AuthOptions = {

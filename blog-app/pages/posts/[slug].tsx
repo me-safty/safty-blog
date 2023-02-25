@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth"
 import Head from "next/head"
 import { FC } from "react"
 import PostPreview from "../../components/posts/post-preview"
-import { sanityClint } from "../../sanity"
+import { sanityClint } from "../../utils/sanity"
 import { Post } from "../../typing"
 
 interface PostProps {
@@ -91,9 +91,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 	    _type == "comment" &&
 	    post._ref == ^._id
 	  ]{
+			_id,
 			_createdAt,
 			comment,
 			author-> {
+				_id,
 				name,
 				imglink,
 				slug

@@ -1,7 +1,7 @@
-import { FC, useState } from "react"
+import { FC, useEffect, useRef, useState } from "react"
 import { Post } from "../../../typing"
 import { SubmitHandler, useForm } from "react-hook-form"
-import { urlFor } from "../../../sanity"
+import { urlFor } from "../../../utils/sanity"
 import PortableText from "react-portable-text"
 import Image from "next/image"
 import dynamic from "next/dynamic"
@@ -9,6 +9,8 @@ import { signIn, useSession } from "next-auth/react"
 import Posts from ".."
 import Link from "next/link"
 import brush2 from "../../../public/brush2.png"
+import { useRouter } from "next/router"
+import deleteComment from "../../../utils/delete"
 const MarkdownMarkdown = dynamic(
 	() =>
 		import("@uiw/react-md-editor").then((mod) => {
@@ -33,6 +35,20 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 	const { data: session } = useSession()
 	const { register, handleSubmit } = useForm<IFormProps>()
 	const [isClicked, setClick] = useState<boolean>(false)
+	const [view, setView] = useState<boolean>(false)
+	const [inputValue, setInputValue] = useState<string>("")
+	const router = useRouter()
+	const comments = useRef<null | HTMLDivElement>(null)
+
+	function refreshData() {
+		router.replace(router.asPath)
+	}
+
+	useEffect(() => {
+		comments.current?.scrollIntoView({ behavior: "smooth" })
+		setClick(false)
+		setInputValue("")
+	}, [post])
 
 	const authorBlogs = post.author.posts.filter((blog) => post._id !== blog._id)
 	const onSubmit: SubmitHandler<IFormProps> = async (data) => {
@@ -47,7 +63,7 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 					method: "POST",
 					body: JSON.stringify(data),
 				})
-				window.location.reload()
+				refreshData()
 			} catch (error) {
 				console.log(error)
 			}
@@ -190,6 +206,8 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 										required
 										placeholder="write your comment."
 										className="w-full outline-none p-1 h-10 sm:h-fit"
+										onChange={(e) => setInputValue(e.target.value)}
+										value={inputValue}
 									/>
 									<input
 										type="submit"
@@ -217,7 +235,10 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 						</div>
 					)}
 				</div>
-				<div className="p-3 py-5 sm:p-10  rounded-xl shadow-md shadow-gray-300 sm:mx-6 my-10 bg-orange-300">
+				<div
+					ref={comments}
+					className="p-3 py-5 sm:p-10 rounded-xl shadow-md shadow-gray-300 sm:mx-6 my-10 bg-orange-300"
+				>
 					<h1 className="text-3xl font-semibold text-gray-800">Comments</h1>
 					<hr className="mt-1 text-gray-800" />
 					<div className="mt-5 space-y-4">
@@ -248,6 +269,28 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 										<span className="text-xs sm:text-sm text-gray-700">
 											{new Date(comment._createdAt).toLocaleString()}
 										</span>
+										{
+											//@ts-ignore
+											session?.user.id === comment.author._id && (
+												<button
+													onClick={() => {
+														deleteComment(comment._id)
+														refreshData()
+													}}
+													className="flex items-center justify-center px-1 bg-gray-100 rounded-full w-6 h-6 bg-opacity-50 cursor-pointer duration-150 hover:bg-opacity-80 text-sm"
+												>
+													x
+													{/*<span className="block mb-[10px]">.</span>
+													<span className="block mb-[10px]">.</span>
+													<span className="block mb-[10px]">.</span>
+													{view && (
+														<button onClick={() => deleteComment(comment._id)}>
+															x
+														</button>
+													)}*/}
+												</button>
+											)
+										}
 									</h2>
 									<p className="sm:text-lg mt-1 sm:mt-0">{comment.comment}</p>
 								</div>

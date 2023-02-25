@@ -16,33 +16,18 @@ export const sanityConfig = {
 
 export const sanityClint = createClient(sanityConfig)
 
-export default async function createComment(
+export default async function deleteDocument(
 	req: NextApiRequest,
 	res: NextApiResponse<Data>
 ) {
-	if (req.method === "POST") {
-		const { _id, name, email, comment, userId } = JSON.parse(req.body)
+	if (req.method === "DELETE") {
+		const _id = req.body
 		try {
-			await sanityClint.create({
-				_type: "comment",
-				post: {
-					_type: "reference",
-					_ref: _id,
-				},
-				author: {
-					_type: "reference",
-					_ref: userId,
-				},
-				name,
-				email,
-				comment,
-			})
-			res.status(200).json({ message: "Comment submitted" })
+			await sanityClint.delete(_id)
+			res.status(200).json({ message: "deleted" })
 		} catch (error) {
 			console.log(error)
-			return res
-				.status(500)
-				.json({ message: "Could't submit the comment", error })
+			return res.status(500).json({ message: "Could't delete", error })
 		}
 	} else {
 		res.status(405).json({ error: `Method '${req.method}' Not Allowed` })

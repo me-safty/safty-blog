@@ -1,4 +1,4 @@
-import { urlFor } from "../../sanity"
+import { urlFor } from "../../utils/sanity"
 import { Author } from "../../typing"
 import Image from "next/image"
 import Baner from "../baner"

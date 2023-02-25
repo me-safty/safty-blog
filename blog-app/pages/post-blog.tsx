@@ -3,7 +3,7 @@ import { getServerSession } from "next-auth"
 import Head from "next/head"
 import { FC } from "react"
 import BlogForm from "../components/blog-form"
-import { sanityClint } from "../sanity"
+import { sanityClint } from "../utils/sanity"
 import { category } from "../typing"
 import { authOptions } from "./api/auth/[...nextauth]"
 

@@ -1,5 +1,5 @@
 import React, { FC } from "react"
-import { urlFor } from "../../../sanity"
+import { urlFor } from "../../../utils/sanity"
 import { Post } from "../../../typing"
 import Image from "next/image"
 import Link from "next/link"

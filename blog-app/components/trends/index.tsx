@@ -1,7 +1,7 @@
 import { NextPage } from "next"
 import { Post } from "../../typing"
 import Image from "next/image"
-import { urlFor } from "../../sanity"
+import { urlFor } from "../../utils/sanity"
 import Link from "next/link"
 import { motion } from "framer-motion"
 export interface Props {

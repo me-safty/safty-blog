@@ -2,7 +2,7 @@ import { GetStaticProps } from "next"
 import Head from "next/head"
 import { FC } from "react"
 import User from "../../components/user"
-import { sanityClint } from "../../sanity"
+import { sanityClint } from "../../utils/sanity"
 import { Author } from "../../typing"
 
 interface userPagePops {
