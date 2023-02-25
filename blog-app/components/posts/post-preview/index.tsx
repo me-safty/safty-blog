@@ -35,7 +35,7 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 	const { data: session } = useSession()
 	const { register, handleSubmit } = useForm<IFormProps>()
 	const [isClicked, setClick] = useState<boolean>(false)
-	const [view, setView] = useState<boolean>(false)
+	const [loading, setLoading] = useState<boolean>(false)
 	const [inputValue, setInputValue] = useState<string>("")
 	const router = useRouter()
 	const comments = useRef<null | HTMLDivElement>(null)
@@ -45,9 +45,10 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 	}
 
 	useEffect(() => {
-		comments.current?.scrollIntoView({ behavior: "smooth" })
+		//comments.current?.scrollIntoView({ behavior: "smooth" })
 		setClick(false)
 		setInputValue("")
+		setLoading(false)
 	}, [post])
 
 	const authorBlogs = post.author.posts.filter((blog) => post._id !== blog._id)
@@ -190,13 +191,15 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 									name="_id"
 									value={post._id}
 								/>
-								<Image
-									src={session?.user?.image as string}
-									alt="author image"
-									width={48}
-									height={48}
-									className="w-12 h-12 rounded-full object-cover min-w-[3rem]"
-								/>
+								<Link href={`/users/${post.author.slug.current}`}>
+									<Image
+										src={session?.user?.image as string}
+										alt="author image"
+										width={48}
+										height={48}
+										className="w-12 h-12 rounded-full object-cover min-w-[3rem]"
+									/>
+								</Link>
 								<div className="rounded-3xl w-full outline-none border border-gray-300 p-2 shadow focus:shadow-lg duration-300 flex flex-col sm:flex-row">
 									<input
 										{...register("comment", { required: true })}
@@ -247,55 +250,71 @@ const PostPreview: FC<PostPreviewProps> = ({ post }) => {
 								No comments yet!
 							</h1>
 						)}
-						{post.comments.map((comment) => (
-							<div
-								className="flex gap-3 bg-zinc-50 bg-opacity-30 rounded-xl px-3 py-3 sm:px-5"
-								key={comment._id}
-							>
-								<Link href={`/users/${comment.author.slug.current}`}>
-									<Image
-										src={comment.author.imglink as string}
-										alt="author image"
-										width={48}
-										height={48}
-										className="min-w-[48px] h-12 rounded-full object-cover"
-									/>
-								</Link>
-								<div>
-									<h2 className="text-lg sm:text-xl font-medium flex sm:items-center sm:gap-1 flex-col sm:flex-row">
-										<Link href={`/users/${comment.author.slug.current}`}>
-											{comment.author.name}{" "}
-										</Link>
-										<span className="text-xs sm:text-sm text-gray-700">
-											{new Date(comment._createdAt).toLocaleString()}
-										</span>
-										{
-											//@ts-ignore
-											session?.user.id === comment.author._id && (
-												<button
-													onClick={() => {
-														deleteComment(comment._id)
-														refreshData()
-													}}
-													className="flex items-center justify-center px-1 bg-gray-100 rounded-full w-6 h-6 bg-opacity-50 cursor-pointer duration-150 hover:bg-opacity-80 text-sm"
-												>
-													x
-													{/*<span className="block mb-[10px]">.</span>
-													<span className="block mb-[10px]">.</span>
-													<span className="block mb-[10px]">.</span>
-													{view && (
-														<button onClick={() => deleteComment(comment._id)}>
-															x
-														</button>
-													)}*/}
-												</button>
-											)
-										}
-									</h2>
-									<p className="sm:text-lg mt-1 sm:mt-0">{comment.comment}</p>
+						{post.comments
+							.sort(
+								(a, b) =>
+									new Date(a._createdAt).getTime() -
+									new Date(b._createdAt).getTime()
+							)
+							.map((comment) => (
+								<div
+									className="flex gap-3 bg-zinc-50 bg-opacity-30 rounded-xl px-3 py-3 sm:px-5"
+									key={comment._id}
+								>
+									<Link href={`/users/${comment.author.slug.current}`}>
+										<Image
+											src={comment.author.imglink as string}
+											alt="author image"
+											width={48}
+											height={48}
+											className="min-w-[48px] h-12 rounded-full object-cover"
+										/>
+									</Link>
+									<div>
+										<h2 className="text-lg sm:text-xl font-medium flex sm:items-center sm:gap-1 flex-col sm:flex-row">
+											<Link href={`/users/${comment.author.slug.current}`}>
+												{comment.author.name}{" "}
+											</Link>
+											<span className="text-xs sm:text-sm text-gray-700">
+												{new Date(comment._createdAt).toLocaleString()}
+											</span>
+											{/*{
+												//@ts-ignore
+												session?.user.id === comment.author._id &&
+													(loading ? (
+														<div className="w-5 h-5 rounded-full bg-slate-100 border-4 border-l-0 border-red-600" />
+													) : (
+														<>
+															<button
+																onClick={() => {
+																	deleteComment(comment._id)
+																	refreshData()
+																	setLoading(true)
+																}}
+																className="py-[2px] px-2 bg-gray-100 font-normal rounded-xl bg-opacity-50 cursor-pointer duration-150 hover:bg-opacity-80 text-sm"
+																//className="underline text-sm font-normal"
+															>
+																delete
+															</button>
+															<button
+																onClick={() => {
+																	//deleteComment(comment._id)
+																	//refreshData()
+																	setLoading(true)
+																}}
+																className="py-[2px] px-2 bg-gray-100 font-normal rounded-xl bg-opacity-50 cursor-pointer duration-150 hover:bg-opacity-80 text-sm"
+																//className="underline text-sm font-normal"
+															>
+																edit
+															</button>
+														</>
+													))
+											}*/}
+										</h2>
+										<p className="sm:text-lg mt-1 sm:mt-0">{comment.comment}</p>
+									</div>
 								</div>
-							</div>
-						))}
+							))}
 					</div>
 				</div>
 			</div>
