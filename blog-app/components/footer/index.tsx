@@ -12,12 +12,6 @@ const Footer = () => {
 						<div className="h-[3.5px] rounded-lg w-[40px] bg-orange-300 absolute -bottom-1 -left-1" />
 						<div className="w-3 h-3 rounded-full border-[3.4px] border-fuchsia-500 absolute top-0 -right-4" />
 					</h1>
-					{/*<ul className="flex flex-col sm:flex-row gap-5 underline sm:gap-10">
-						<li>About</li>
-						<li>About</li>
-						<li>About</li>
-						<li>About</li>
-					</ul>*/}
 					<p className="text-sm">
 						created & designed by{" "}
 						<span className="underline">Mohamed Safty</span>

@@ -3,7 +3,7 @@ import { urlFor } from "../../../utils/sanity"
 import { Post } from "../../../typing"
 import Image from "next/image"
 import Link from "next/link"
-import RightArrow from "../../RightArrow"
+import RightArrow from "../../icons/RightArrow"
 
 interface PostBoxProps {
 	post: Post

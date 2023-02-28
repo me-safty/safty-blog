@@ -1,5 +1,4 @@
 import { GetStaticProps } from "next"
-import { getServerSession } from "next-auth"
 import Head from "next/head"
 import { FC } from "react"
 import PostPreview from "../../components/posts/post-preview"
@@ -117,6 +116,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		props: {
 			post: post,
 		},
-		revalidate: 1,
+		revalidate: false,
 	}
 }

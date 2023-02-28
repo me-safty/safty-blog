@@ -19,23 +19,12 @@ const Landing: NextPage<Props> = ({ catagories, posts }) => {
 				<Baner />
 				{session ? (
 					<Link href="/post-blog">
-						{/*<button className="absolute bottom-0 left-[50%] -translate-x-[50%] translate-y-[50%] shadow-lg group hover:py-3 hover:px-7 active:py-1 active:px-4 bg-orange-300  hover:brightness-95 duration-150 rounded-full flex items-center px-6 py-2 text-white whitespace-nowrap text-lg sm:text-2xl font-medium">
-							post a blog
-							<RightArrow className="h-[23px] w-[23px] ml-2 group-hover:fill-green-600 fill-fuchsia-500 mt-[6px]" />
-						</button>*/}
 						<Button
 							onClick={() => undefined}
 							title="write a blog"
 						/>
 					</Link>
 				) : (
-					//<button
-					//	onClick={() => signIn()}
-					//	className="whitespace-nowrap absolute bottom-0 left-[50%] -translate-x-[50%] translate-y-[50%] shadow-lg group hover:py-3 hover:px-7 active:py-1 active:px-4 bg-orange-300  hover:brightness-95 duration-150 rounded-full flex items-center px-6 py-2 text-white sm:text-2xl font-medium"
-					//>
-					//	register and share your story
-					//	<RightArrow className="h-[20px] w-[20px] sm:h-[23px] sm:w-[23px] ml-2 group-hover:fill-green-600 fill-fuchsia-500 mt-[6px]" />
-					//</button>
 					<Button
 						title="register and share your story"
 						onClick={() => signIn()}

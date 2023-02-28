@@ -4,7 +4,7 @@ import { urlFor } from "../../../utils/sanity"
 import { Post } from "../../../typing"
 import { motion } from "framer-motion"
 import Link from "next/link"
-import RightArrow from "../../RightArrow"
+import RightArrow from "../../icons/RightArrow"
 export interface ExpandBoxPostProps {
 	post: Post
 }

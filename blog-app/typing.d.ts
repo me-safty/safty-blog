@@ -35,6 +35,20 @@ export interface comment {
 	post: Post
 	author: Author
 }
+export interface commentWithRef {
+	_type: string
+	_id: string
+	_createdAt?: string
+	comment: string
+	author: {
+		_type: string
+		_ref: string
+	}
+	post: {
+		_ref: string
+		_type: string
+	}
+}
 export interface category {
 	_id: string
 	title: string
