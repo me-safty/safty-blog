@@ -9,7 +9,8 @@ interface Data {
 export const sanityConfig = {
 	dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
 	projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
-	useCdn: process.env.NODE_ENV === "production",
+	//useCdn: process.env.NODE_ENV === "production",
+	useCdn: false,
 	apiVersion: "2022-12-17",
 	token: process.env.SANITY_API_TOKEN,
 }

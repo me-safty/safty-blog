@@ -1,41 +1,78 @@
-import React, { useEffect, useRef, useState } from "react";
-import { comment } from "../../../../typing";
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
-import deleteComment from "../../../../utils/delete";
-import LoadingSpinier from "../../../icons/LoadingSpinier";
-import Link from "next/link";
-import editComment from "../../../../utils/edit-comment";
-import Image from "next/image";
-import Dots from "../../../icons/Dots";
-import EditDeleteControl from "./EditDeleteControl";
+import React, { useEffect, useRef, useState } from "react"
+import { comment, Post } from "../../../../typing"
+import { useSession } from "next-auth/react"
+import { useRouter } from "next/router"
+import deleteComment from "../../../../utils/delete"
+import LoadingSpinier from "../../../icons/LoadingSpinier"
+import Link from "next/link"
+import editComment from "../../../../utils/edit-comment"
+import Image from "next/image"
+import Dots from "../../../icons/Dots"
+import EditDeleteControl from "./EditDeleteControl"
+import { sanityClint } from "../../../../utils/sanity"
+import getComments from "../../../../utils/get-comments"
 
 interface ICommentProps {
-	comment: comment;
-	postId: string;
-	isClicked: boolean;
-	setClick: React.Dispatch<React.SetStateAction<boolean>>;
+	comment: comment
+	postId: string
+	isClicked: boolean
+	setClick: React.Dispatch<React.SetStateAction<boolean>>
+	setCommentsData: React.Dispatch<React.SetStateAction<comment[]>>
+	setPostData: React.Dispatch<React.SetStateAction<Post>>
 }
 
-const Comment = ({ comment, postId, isClicked, setClick }: ICommentProps) => {
-	const { data: session } = useSession();
-	const [loading, setLoading] = useState<boolean>(false);
-	const [editLoading, setEditLoading] = useState<boolean>(false);
-	const [edit, setEdit] = useState<boolean>(false);
-	const [open, setOpen] = useState<boolean>(false);
-	const [value, setValue] = useState<string>(comment.comment);
-	const input = useRef<null | HTMLInputElement>(null);
-	const router = useRouter();
+const Comment = ({
+	comment,
+	postId,
+	isClicked,
+	setClick,
+	setCommentsData,
+	setPostData,
+}: ICommentProps) => {
+	const { data: session } = useSession()
+	const [loading, setLoading] = useState<boolean>(false)
+	const [editLoading, setEditLoading] = useState<boolean>(false)
+	const [edit, setEdit] = useState<boolean>(false)
+	const [open, setOpen] = useState<boolean>(false)
+	//const [commentData, setComment] = useState<comment>(comment)
+	const [value, setValue] = useState<string>(comment.comment)
+	const input = useRef<null | HTMLInputElement>(null)
+	const router = useRouter()
 
-	function refreshData() {
-		router.replace(router.asPath);
+	//const query = '*[_type == "comment" && post._ref == $postId]'
+	//const params = { postId }
+
+	//const subscription = sanityClint.listen(query, params).subscribe((update) => {
+	//	const commentText = update.result?.comment
+	//	if (commentText) {
+	//		console.log("first")
+	//	}
+	//	console.log(`commented: `, update)
+	//})
+
+	async function refreshData() {
+		setTimeout(async () => {
+			//router.replace(router.asPath)
+			//const editedComment = await getComment(commentData._id)
+			//const newPost = await getPost(postId)
+			const newComments = await getComments(postId)
+			//setComment(editedComment)
+			setCommentsData(newComments)
+			//setPostData(newPost)
+			setLoading(false)
+			setEdit(false)
+			setEditLoading(false)
+			setClick(false)
+			//console.log(commentData.comment, editedComment.comment)
+		}, 2000)
 	}
 
-	useEffect(() => {
-		setLoading(false);
-		setEdit(false);
-		setEditLoading(false);
-	}, [comment]);
+	//useEffect(() => {
+	//	setLoading(false)
+	//	setEdit(false)
+	//	setEditLoading(false)
+	//	setComment(comment)
+	//}, [comment])
 
 	function handleEditComment(commentText: string) {
 		editComment({
@@ -50,7 +87,7 @@ const Comment = ({ comment, postId, isClicked, setClick }: ICommentProps) => {
 				_type: "reference",
 			},
 			comment: commentText,
-		});
+		})
 	}
 
 	return (
@@ -98,8 +135,12 @@ const Comment = ({ comment, postId, isClicked, setClick }: ICommentProps) => {
 							type="text"
 							ref={input}
 							placeholder="write your comment"
+							//value={commentData.comment}
 							value={value}
-							onChange={(e) => setValue(e.target.value)}
+							onChange={(e) =>
+								//setComment((p) => ({ ...p, comment: e.target.value }))
+								setValue(e.target.value)
+							}
 							className="w-full outline-none p-1 h-10 sm:h-fit"
 							required
 						/>
@@ -111,10 +152,11 @@ const Comment = ({ comment, postId, isClicked, setClick }: ICommentProps) => {
 						<button
 							onClick={() => {
 								if (isClicked === false && value) {
-									handleEditComment(value);
-									setClick(true);
-									setEditLoading(true);
-									refreshData();
+									//handleEditComment(commentData.comment)
+									handleEditComment(value)
+									setClick(true)
+									setEditLoading(true)
+									refreshData()
 								}
 							}}
 							className={`w-full sm:w-fit bg-orange-300 text-white py-[2px] px-5 rounded-3xl shadow-md ${
@@ -134,7 +176,7 @@ const Comment = ({ comment, postId, isClicked, setClick }: ICommentProps) => {
 				)}
 			</div>
 		</div>
-	);
-};
+	)
+}
 
-export default Comment;
+export default Comment

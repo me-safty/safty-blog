@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react"
 import deleteComment from "../../../../utils/delete"
 import Delete from "../../../icons/Delete"
-import Dots from "../../../icons/Dots"
 import Edit from "../../../icons/Edit"
 import LoadingSpinier from "../../../icons/LoadingSpinier"
 
