@@ -25,9 +25,7 @@ const PostPreview = ({ post }: PostPreviewProps) => {
 	const [postData, setPostData] = useState<Post>(post)
 	const [commentsData, setCommentsData] = useState<comment[]>(post.comments)
 
-	const authorBlogs = post.author.posts.filter(
-		(blog) => post._id !== blog._id
-	)
+	const authorBlogs = post.author.posts.filter((blog) => post._id !== blog._id)
 	return (
 		<div className="relative">
 			<div className=" absolute top-0 left-0 w-full h-[420px] lg:h-[300px] bg-green-700" />
@@ -133,17 +131,13 @@ const PostPreview = ({ post }: PostPreviewProps) => {
 				)}
 				<hr className=" border border-orange-300 mx-auto max-w-5xl mb-10 mt-5" />
 				<CommentSubmitForm
-					post={postData}
-					setPostData={setPostData}
+					post={post}
 					setCommentsData={setCommentsData}
 				/>
 				<Comments
-					comments={postData.comments}
-					postId={postData._id}
-					//postData={postData}
-					setPostData={setPostData}
 					commentsData={commentsData}
 					setCommentsData={setCommentsData}
+					postId={post._id}
 				/>
 			</div>
 		</div>

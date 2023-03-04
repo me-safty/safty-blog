@@ -1,16 +1,15 @@
 import { comment, Post } from "../../../../typing"
 import { signIn, useSession } from "next-auth/react"
 import { SubmitHandler, useForm } from "react-hook-form"
-import { useEffect, useState } from "react"
-import { useRouter } from "next/router"
+import { useState } from "react"
+//import { useRouter } from "next/router"
 import Link from "next/link"
 import Image from "next/image"
 import LoadingSpinier from "../../../icons/LoadingSpinier"
-import getPost from "../../../../utils/get-comments"
+import getComments from "../../../../utils/get-comments"
 
 interface ICommentSubmitForm {
 	post: Post
-	setPostData: React.Dispatch<React.SetStateAction<Post>>
 	setCommentsData: React.Dispatch<React.SetStateAction<comment[]>>
 }
 
@@ -24,37 +23,23 @@ interface IFormProps {
 
 const CommentSubmitForm = ({
 	post,
-	setPostData,
 	setCommentsData,
 }: ICommentSubmitForm) => {
 	const { data: session } = useSession()
 	const { register, handleSubmit } = useForm<IFormProps>()
 	const [isClicked, setClick] = useState<boolean>(false)
 	const [inputValue, setInputValue] = useState<string>("")
-	const router = useRouter()
+	//const router = useRouter()
 
 	function refreshData() {
 		//router.replace(router.asPath)
-
 		setTimeout(async () => {
-			//router.replace(router.asPath)
-			//const editedComment = await getComment(commentData._id)
-			//const newPost = await getPost(post._id)
-			const newComments = await getPost(post._id)
-			//setComment(editedComment)
+			const newComments = await getComments(post._id)
 			setCommentsData(newComments)
-			//setPostData(newPost)
 			setClick(false)
 			setInputValue("")
-			//console.log(commentData.comment, editedComment.comment)
 		}, 2000)
 	}
-
-	//useEffect(() => {
-	//	//comments.current?.scrollIntoView({ behavior: "smooth" })
-	//	setClick(false)
-	//	setInputValue("")
-	//}, [post])
 
 	const onSubmit: SubmitHandler<IFormProps> = async (data) => {
 		if (session && isClicked === false) {

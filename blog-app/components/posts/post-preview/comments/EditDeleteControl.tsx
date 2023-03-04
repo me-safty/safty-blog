@@ -29,7 +29,7 @@ const EditDeleteControl = ({
 	//}, [commentId]);
 
 	return (
-		<div className="flex gap-1 pt-[3px]">
+		<div className="flex flex-col justify-center gap-[5px] pt-[3px]">
 			{/*<button
 				onClick={() => setOpen((p) => !p)}
 				style={{ transform: open ? "rotate(90deg)" : "" }}
@@ -55,9 +55,9 @@ const EditDeleteControl = ({
 						opacity: isClicked ? 0.5 : 1,
 						cursor: isClicked ? "default" : "pointer",
 					}}
-					className="w-fit px-1 py-[5px] bg-gray-100 font-normal rounded-xl bg-opacity-50 duration-150 hover:bg-opacity-80 text-sm"
+					className="w-6 h-[50%] flex items-center justify-center bg-gray-100 font-normal rounded-[7.5px] bg-opacity-50 duration-150 hover:bg-opacity-80 text-sm"
 				>
-					<Delete className="w-[13px] h-4 sm:w-5" />
+					<Delete className="w-[13px] h-4" />
 				</button>
 			)}
 			<button
@@ -70,9 +70,9 @@ const EditDeleteControl = ({
 					opacity: isClicked ? 0.5 : 1,
 					cursor: isClicked ? "default" : "pointer",
 				}}
-				className="w-fit py-[1px] px-1 sm:px-[5px] sm:py-[5px] bg-gray-100 font-normal rounded-xl bg-opacity-50 duration-150 hover:bg-opacity-80 text-sm"
+				className="w-6 h-[50%] flex items-center justify-center bg-gray-100 font-normal rounded-[7.5px] bg-opacity-50 duration-150 hover:bg-opacity-80 text-sm"
 			>
-				<Edit className="w-[13px] h-4 sm:w-[18px]" />
+				<Edit className="w-[13px] h-4" />
 			</button>
 		</div>
 	)

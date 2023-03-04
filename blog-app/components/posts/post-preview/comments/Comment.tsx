@@ -1,15 +1,11 @@
-import React, { useEffect, useRef, useState } from "react"
-import { comment, Post } from "../../../../typing"
+import React, { useState } from "react"
+import { comment } from "../../../../typing"
 import { useSession } from "next-auth/react"
-import { useRouter } from "next/router"
-import deleteComment from "../../../../utils/delete"
 import LoadingSpinier from "../../../icons/LoadingSpinier"
 import Link from "next/link"
 import editComment from "../../../../utils/edit-comment"
 import Image from "next/image"
-import Dots from "../../../icons/Dots"
 import EditDeleteControl from "./EditDeleteControl"
-import { sanityClint } from "../../../../utils/sanity"
 import getComments from "../../../../utils/get-comments"
 
 interface ICommentProps {
@@ -18,7 +14,6 @@ interface ICommentProps {
 	isClicked: boolean
 	setClick: React.Dispatch<React.SetStateAction<boolean>>
 	setCommentsData: React.Dispatch<React.SetStateAction<comment[]>>
-	setPostData: React.Dispatch<React.SetStateAction<Post>>
 }
 
 const Comment = ({
@@ -27,52 +22,26 @@ const Comment = ({
 	isClicked,
 	setClick,
 	setCommentsData,
-	setPostData,
 }: ICommentProps) => {
 	const { data: session } = useSession()
 	const [loading, setLoading] = useState<boolean>(false)
 	const [editLoading, setEditLoading] = useState<boolean>(false)
 	const [edit, setEdit] = useState<boolean>(false)
-	const [open, setOpen] = useState<boolean>(false)
-	//const [commentData, setComment] = useState<comment>(comment)
 	const [value, setValue] = useState<string>(comment.comment)
-	const input = useRef<null | HTMLInputElement>(null)
-	const router = useRouter()
-
-	//const query = '*[_type == "comment" && post._ref == $postId]'
-	//const params = { postId }
-
-	//const subscription = sanityClint.listen(query, params).subscribe((update) => {
-	//	const commentText = update.result?.comment
-	//	if (commentText) {
-	//		console.log("first")
-	//	}
-	//	console.log(`commented: `, update)
-	//})
+	//const [open, setOpen] = useState<boolean>(false)
+	//const [commentData, setComment] = useState<comment>(comment)
+	//const router = useRouter()
 
 	async function refreshData() {
 		setTimeout(async () => {
-			//router.replace(router.asPath)
-			//const editedComment = await getComment(commentData._id)
-			//const newPost = await getPost(postId)
 			const newComments = await getComments(postId)
-			//setComment(editedComment)
 			setCommentsData(newComments)
-			//setPostData(newPost)
 			setLoading(false)
 			setEdit(false)
 			setEditLoading(false)
 			setClick(false)
-			//console.log(commentData.comment, editedComment.comment)
 		}, 2000)
 	}
-
-	//useEffect(() => {
-	//	setLoading(false)
-	//	setEdit(false)
-	//	setEditLoading(false)
-	//	setComment(comment)
-	//}, [comment])
 
 	function handleEditComment(commentText: string) {
 		editComment({
@@ -92,7 +61,7 @@ const Comment = ({
 
 	return (
 		<div
-			className="flex gap-3 bg-zinc-50 bg-opacity-30 rounded-xl px-3 py-3 sm:px-5"
+			className="flex gap-2 rounded-xl"
 			key={comment._id}
 		>
 			<Link href={`/users/${comment.author.slug.current}`}>
@@ -101,20 +70,20 @@ const Comment = ({
 					alt="author image"
 					width={48}
 					height={48}
-					className="h-10 w-10 min-w-[40px] sm:min-w-[48px] sm:h-12 rounded-full object-cover"
+					className="h-10 w-10 mt-3 min-w-[40px] sm:min-w-[48px] sm:h-12 rounded-full object-cover"
 				/>
 			</Link>
-			<div className="flex-1">
-				<div className="flex items-start gap-1 sm:gap-2">
+			<div className="flex-1 bg-zinc-50 bg-opacity-30 rounded-xl px-3 py-2 sm:px-5">
+				<div className="flex items-center gap-1 sm:gap-2">
 					<h2 className="sm:text-xl font-medium flex sm:items-center sm:gap-1 flex-col sm:flex-row">
 						<Link href={`/users/${comment.author.slug.current}`}>
 							{comment.author.name}{" "}
 						</Link>
-						<span className="text-xs sm:text-sm text-gray-700">
+						<span className="text-[10px] sm:text-xs text-gray-700">
 							{new Date(comment._createdAt).toLocaleString()}
 						</span>
 					</h2>
-					{
+					{/*{
 						//@ts-ignore
 						session?.user.id === comment.author._id && (
 							<EditDeleteControl
@@ -127,13 +96,12 @@ const Comment = ({
 								commentId={comment._id}
 							/>
 						)
-					}
+					}*/}
 				</div>
 				{edit ? (
 					<div className="mt-1 bg-white rounded-3xl items-center w-full outline-none border border-gray-300 px-2 py-1 shadow focus:shadow-lg duration-300 flex flex-col sm:flex-row">
 						<input
 							type="text"
-							ref={input}
 							placeholder="write your comment"
 							//value={commentData.comment}
 							value={value}
@@ -175,6 +143,20 @@ const Comment = ({
 					<p className="text-sm sm:text-lg mt-1 sm:mt-0">{comment.comment}</p>
 				)}
 			</div>
+			{
+				//@ts-ignore
+				session?.user.id === comment.author._id && (
+					<EditDeleteControl
+						setEdit={setEdit}
+						loading={loading}
+						setLoading={setLoading}
+						setClick={setClick}
+						isClicked={isClicked}
+						refreshData={refreshData}
+						commentId={comment._id}
+					/>
+				)
+			}
 		</div>
 	)
 }

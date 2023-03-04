@@ -1,22 +1,15 @@
-import { useEffect, useState } from "react"
-import { comment, Post } from "../../../../typing"
+import { useState } from "react"
+import { comment } from "../../../../typing"
 import Comment from "./Comment"
 
 interface ICommentsProps {
-	comments: comment[]
 	postId: string
-	//postData: Post
-	setPostData: React.Dispatch<React.SetStateAction<Post>>
 	commentsData: comment[]
 	setCommentsData: React.Dispatch<React.SetStateAction<comment[]>>
 }
 
-const Comments = ({ comments, postId, setPostData, commentsData, setCommentsData }: ICommentsProps) => {
+const Comments = ({ postId, commentsData, setCommentsData }: ICommentsProps) => {
 	const [isClicked, setClick] = useState<boolean>(false)
-
-	//useEffect(() => {
-	//	setClick(false)
-	//}, [comments])
 
 	return (
 		<div className="p-3 py-5 sm:p-10 rounded-xl shadow-md shadow-gray-300 sm:mx-6 my-10 bg-orange-300">
@@ -42,7 +35,6 @@ const Comments = ({ comments, postId, setPostData, commentsData, setCommentsData
 							isClicked={isClicked}
 							setClick={setClick}
 							setCommentsData={setCommentsData}
-							setPostData={setPostData}
 						/>
 					))}
 			</div>
