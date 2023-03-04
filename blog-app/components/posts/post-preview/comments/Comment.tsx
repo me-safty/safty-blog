@@ -104,7 +104,7 @@ const Comment = ({
 					className="h-10 w-10 min-w-[40px] sm:min-w-[48px] sm:h-12 rounded-full object-cover"
 				/>
 			</Link>
-			<div>
+			<div className="flex-1">
 				<div className="flex items-start gap-1 sm:gap-2">
 					<h2 className="sm:text-xl font-medium flex sm:items-center sm:gap-1 flex-col sm:flex-row">
 						<Link href={`/users/${comment.author.slug.current}`}>

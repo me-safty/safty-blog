@@ -114,7 +114,7 @@ const CommentSubmitForm = ({
 								value={inputValue}
 							/>
 							{isClicked && (
-								<div className="animate-spin">
+								<div className="animate-spin m-auto">
 									<LoadingSpinier className="scale-[.70]" />
 								</div>
 							)}
