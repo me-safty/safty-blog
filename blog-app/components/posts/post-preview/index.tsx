@@ -8,7 +8,7 @@ import Link from "next/link"
 import brush2 from "../../../public/brush2.png"
 import Comments from "./comments/Comments"
 import CommentSubmitForm from "./comments/CommentSubmitForm"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 const MarkdownMarkdown = dynamic(
 	() =>
 		import("@uiw/react-md-editor").then((mod) => {
@@ -22,8 +22,12 @@ interface PostPreviewProps {
 }
 
 const PostPreview = ({ post }: PostPreviewProps) => {
-	const [postData, setPostData] = useState<Post>(post)
+	//const [postData, setPostData] = useState<Post>(post)
 	const [commentsData, setCommentsData] = useState<comment[]>(post.comments)
+
+	useEffect(() => {
+		setCommentsData(post.comments)
+	}, [post])
 
 	const authorBlogs = post.author.posts.filter((blog) => post._id !== blog._id)
 	return (
