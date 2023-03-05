@@ -28,26 +28,26 @@ const PostPage: FC<PostProps> = ({ post }) => {
 
 export default PostPage
 
-export const getStaticPaths = async () => {
-	const query = `*[_type == "post"]{
-    _id,
-    slug {
-      current
-    }
-  }`
-	const posts = await sanityClint.fetch(query)
-	const paths = posts.map((post: Post) => ({
-		params: {
-			slug: post.slug.current,
-		},
-	}))
-	return {
-		paths,
-		fallback: "blocking",
-	}
-}
+//export const getStaticPaths = async () => {
+//	const query = `*[_type == "post"]{
+//    _id,
+//    slug {
+//      current
+//    }
+//  }`
+//	const posts = await sanityClint.fetch(query)
+//	const paths = posts.map((post: Post) => ({
+//		params: {
+//			slug: post.slug.current,
+//		},
+//	}))
+//	return {
+//		paths,
+//		fallback: "blocking",
+//	}
+//}
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetStaticProps = async ({ params }) => {
 	const query = `*[_type == "post" && slug.current == $slug][0]{
 		_id,
 		_createdAt,
@@ -116,6 +116,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 		props: {
 			post: post,
 		},
-		revalidate: 1,
+		//revalidate: 1,
 	}
 }
