@@ -9,6 +9,7 @@ import brush2 from "../../../public/brush2.png"
 import Comments from "./comments/Comments"
 import CommentSubmitForm from "./comments/CommentSubmitForm"
 import { useEffect, useState } from "react"
+import { motion } from "framer-motion"
 //import useSanityListener from "../../../hooks/useSanityListener"
 const MarkdownMarkdown = dynamic(
 	() =>
@@ -47,59 +48,78 @@ const PostPreview = ({ post }: PostPreviewProps) => {
 						priority
 						className="absolute -top-10 -left-3 opacity-10 hidden lg:block"
 					/>
-					<div className="lg:w-[56%] relative">
-						<p className=" text-orange-300 font-medium text-lg">
-							{post.category.title}
-						</p>
-						<h1 className="text-[26px] lg:text-3xl mb-2 capitalize text-white font-medium leading-10">
-							{post.title}
-						</h1>
-						<div className="flex w-20 h-[5px] gap-1">
-							<div className="w-[80%] group-hover:w-[30%] duration-150 rounded-xl bg-orange-300"></div>
-							<div className="w-[20%] group-hover:w-[70%] duration-150 rounded full bg-fuchsia-500"></div>
-						</div>
-					</div>
-					<div className="relative">
-						<Link href={`/users/${post.author.slug?.current}`}>
-							<div className="flex w-fit items-center gap-3 mt-5 bg-gray-50 bg-opacity-20 p-3 px-4 rounded-xl">
-								<Image
-									src={
-										post.author.imglink
-											? post.author.imglink
-											: urlFor(post.author.image).url()
-									}
-									alt="author image"
-									width={48}
-									height={48}
-									className="w-14 h-14 rounded-full object-cover min-w-[3rem]"
-								/>
-								<div>
-									<p className="text-white font-medium text-xl">
-										{post.author.name}
-									</p>
-									<p className="text-gray-200">
-										{new Date(post._createdAt).toLocaleString()}
-									</p>
-								</div>
-							</div>
-						</Link>
-						<div className="mt-3 flex lg:justify-center text-center text-orange-300 font-medium text-xl">
-							<p className="bg-gray-50 bg-opacity-20 px-3 py-1 rounded-xl">
-								comments:{" "}
-								<span className=" text-fuchsia-500">
-									{post.comments.length}
-								</span>
+					<motion.div
+						initial={{ x: -30, opacity: 0 }}
+						animate={{ x: 0, opacity: 1 }}
+						transition={{ duration: 0.5 }}
+						className="lg:w-[56%] relative"
+					>
+						<div>
+							<p className=" text-orange-300 font-medium text-lg">
+								{post.category.title}
 							</p>
+							<h1 className="text-[26px] lg:text-3xl mb-2 capitalize text-white font-medium leading-10">
+								{post.title}
+							</h1>
+							<div className="flex w-20 h-[5px] gap-1">
+								<div className="w-[80%] group-hover:w-[30%] duration-150 rounded-xl bg-orange-300"></div>
+								<div className="w-[20%] group-hover:w-[70%] duration-150 rounded full bg-fuchsia-500"></div>
+							</div>
 						</div>
-					</div>
+					</motion.div>
+					<motion.div
+						initial={{ x: 30, opacity: 0 }}
+						animate={{ x: 0, opacity: 1 }}
+						transition={{ duration: 0.5 }}
+					>
+						<div className="relative">
+							<Link href={`/users/${post.author.slug?.current}`}>
+								<div className="flex w-fit items-center gap-3 mt-5 bg-gray-50 bg-opacity-20 p-3 px-4 rounded-xl">
+									<Image
+										src={
+											post.author.imglink
+												? post.author.imglink
+												: urlFor(post.author.image).url()
+										}
+										alt="author image"
+										width={48}
+										height={48}
+										className="w-14 h-14 rounded-full object-cover min-w-[3rem]"
+									/>
+									<div>
+										<p className="text-white font-medium text-xl">
+											{post.author.name}
+										</p>
+										<p className="text-gray-200">
+											{new Date(post._createdAt).toLocaleString()}
+										</p>
+									</div>
+								</div>
+							</Link>
+							<div className="mt-3 flex lg:justify-center text-center text-orange-300 font-medium text-xl">
+								<p className="bg-gray-50 bg-opacity-20 px-3 py-1 rounded-xl">
+									comments:{" "}
+									<span className=" text-fuchsia-500">
+										{post.comments.length}
+									</span>
+								</p>
+							</div>
+						</div>
+					</motion.div>
 				</div>
-				<Image
-					alt={post.title}
-					width={900}
-					height={600}
-					className="w-full h-[260px] sm:h-[450px] lg:h-[600px] rounded-3xl object-cover"
-					src={urlFor(post.mainImage).url()}
-				/>
+				<motion.div
+					initial={{ y: -10, opacity: 0 }}
+					animate={{ y: 0, opacity: 1 }}
+					transition={{ duration: 0.5 }}
+				>
+					<Image
+						alt={post.title}
+						width={900}
+						height={600}
+						className="w-full h-[260px] sm:h-[450px] lg:h-[600px] rounded-3xl object-cover"
+						src={urlFor(post.mainImage).url()}
+					/>
+				</motion.div>
 				<article className="px-3">
 					<div className="mt-10 text-lg px-3">
 						{post.body ? (
