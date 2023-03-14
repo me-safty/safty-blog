@@ -13,7 +13,7 @@ const Trends: NextPage<Props> = ({ posts }) => {
 		.slice(0, 3)
 	return (
 		<motion.div
-			initial={{ x: -100, opacity: 0 }}
+			initial={{ x: -30, opacity: 0 }}
 			animate={{ x: 0, opacity: 1 }}
 			transition={{ duration: 0.5 }}
 			className="px-4 py-8 sm:p-8 rounded-xl bg-orange-300 group relative"

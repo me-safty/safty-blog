@@ -10,7 +10,7 @@ interface Props {
 const Catagories: NextPage<Props> = ({ catagories }) => {
 	return (
 		<motion.div
-			initial={{ x: 100, opacity: 0 }}
+			initial={{ x: 30, opacity: 0 }}
 			animate={{ x: 0, opacity: 1 }}
 			transition={{ duration: 0.5, delay: 0.2 }}
 			className="px-5 py-8 sm:p-8 rounded-xl bg-fuchsia-500 text-white group"
