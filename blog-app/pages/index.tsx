@@ -1,5 +1,5 @@
 import type { NextPage } from "next"
-import { sanityClint } from "../utils/sanity"
+import { sanityClint } from "../lib/sanity"
 import { category, Post } from "../typing"
 import Head from "next/head"
 import Posts from "../components/posts"

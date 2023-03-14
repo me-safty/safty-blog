@@ -6,10 +6,10 @@ import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import LoadingSpinier from "../../../icons/LoadingSpinier"
-import getComments from "../../../../utils/get-comments"
+import getComments from "../../../../lib/get-comments"
 
 interface ICommentSubmitForm {
-	post: Post
+	postId: string
 	setCommentsData: React.Dispatch<React.SetStateAction<comment[]>>
 }
 
@@ -21,20 +21,15 @@ interface IFormProps {
 	comment: string
 }
 
-const CommentSubmitForm = ({
-	post,
-	setCommentsData,
-}: ICommentSubmitForm) => {
+const CommentSubmitForm = ({ postId, setCommentsData }: ICommentSubmitForm) => {
 	const { data: session } = useSession()
 	const { register, handleSubmit } = useForm<IFormProps>()
 	const [isClicked, setClick] = useState<boolean>(false)
 	const [inputValue, setInputValue] = useState<string>("")
-	//const router = useRouter()
 
 	function refreshData() {
-		//router.replace(router.asPath)
 		setTimeout(async () => {
-			const newComments = await getComments(post._id)
+			const newComments = await getComments(postId)
 			setCommentsData(newComments)
 			setClick(false)
 			setInputValue("")
@@ -75,9 +70,13 @@ const CommentSubmitForm = ({
 							{...register("_id")}
 							type="hidden"
 							name="_id"
-							value={post._id}
+							value={postId}
 						/>
-						<Link href={`/users/${post.author.slug.current}`}>
+						<Link
+							href={`/users/${
+								session.user?.email?.toLowerCase().split("@")[0]
+							}`}
+						>
 							<Image
 								src={session?.user?.image as string}
 								alt="author image"

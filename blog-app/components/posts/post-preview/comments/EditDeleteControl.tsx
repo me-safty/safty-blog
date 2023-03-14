@@ -1,4 +1,4 @@
-import deleteComment from "../../../../utils/delete"
+import deleteComment from "../../../../lib/delete"
 import Delete from "../../../icons/Delete"
 import Edit from "../../../icons/Edit"
 import LoadingSpinier from "../../../icons/LoadingSpinier"
@@ -22,21 +22,8 @@ const EditDeleteControl = ({
 	refreshData,
 	commentId,
 }: EditDeleteControlProps) => {
-	//const [open, setOpen] = useState<boolean>(false);
-
-	//useEffect(() => {
-	//	setOpen(false);
-	//}, [commentId]);
-
 	return (
 		<div className="flex flex-col justify-center gap-[5px] pt-[3px]">
-			{/*<button
-				onClick={() => setOpen((p) => !p)}
-				style={{ transform: open ? "rotate(90deg)" : "" }}
-				className="bg-white bg-opacity-50 flex items-center p-[2px] rounded-full duration-150 hover:bg-opacity-80"
-			>
-				<Dots className="scale-[.80]" />
-			</button>*/}
 			{loading ? (
 				<div className="animate-spin">
 					<LoadingSpinier className=" scale-[.60]" />

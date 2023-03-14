@@ -1,5 +1,5 @@
 import { comment, Post } from "../../../typing"
-import { urlFor } from "../../../utils/sanity"
+import { urlFor } from "../../../lib/sanity"
 import PortableText from "react-portable-text"
 import Image from "next/image"
 import dynamic from "next/dynamic"
@@ -9,6 +9,7 @@ import brush2 from "../../../public/brush2.png"
 import Comments from "./comments/Comments"
 import CommentSubmitForm from "./comments/CommentSubmitForm"
 import { useEffect, useState } from "react"
+//import useSanityListener from "../../../hooks/useSanityListener"
 const MarkdownMarkdown = dynamic(
 	() =>
 		import("@uiw/react-md-editor").then((mod) => {
@@ -23,8 +24,11 @@ interface PostPreviewProps {
 
 const PostPreview = ({ post }: PostPreviewProps) => {
 	//const [postData, setPostData] = useState<Post>(post)
+	//const { comments } = useSanityListener(sanityClint, post._id);
 	const [commentsData, setCommentsData] = useState<comment[]>(post.comments)
-
+	//useEffect(() => {
+	//	setCommentsData(comments)
+	//}, [comments])
 	useEffect(() => {
 		setCommentsData(post.comments)
 	}, [post])
@@ -135,7 +139,7 @@ const PostPreview = ({ post }: PostPreviewProps) => {
 				)}
 				<hr className=" border border-orange-300 mx-auto max-w-5xl mb-10 mt-5" />
 				<CommentSubmitForm
-					post={post}
+					postId={post._id}
 					setCommentsData={setCommentsData}
 				/>
 				<Comments

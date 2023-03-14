@@ -1,7 +1,7 @@
 import { NextPage } from "next"
 import { Post } from "../../typing"
 import Image from "next/image"
-import { urlFor } from "../../utils/sanity"
+import { urlFor } from "../../lib/sanity"
 import Link from "next/link"
 import { motion } from "framer-motion"
 export interface Props {
@@ -37,8 +37,8 @@ const Trends: NextPage<Props> = ({ posts }) => {
 							</p>
 						</Link>
 						<div className="mt-2">
-							<Link href={`/users/${post.author.slug.current}`}>
-								<div className="flex gap-2 items-center">
+							<Link href={`/users/${post.author.slug.current}`} className="w-fit block">
+								<div className="flex gap-2 items-center w-fit">
 									<Image
 										src={
 											post.author.imglink

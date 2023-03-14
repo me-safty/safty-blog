@@ -2,7 +2,7 @@ import { GetStaticProps } from "next"
 import Head from "next/head"
 import { FC } from "react"
 import PostPreview from "../../components/posts/post-preview"
-import { sanityClint } from "../../utils/sanity"
+import { sanityClint } from "../../lib/sanity"
 import { Post } from "../../typing"
 
 interface PostProps {
