@@ -39,19 +39,12 @@ const Comment = ({
 			setClick(false)
 		}, 2000)
 	}
-	
+
 	function handleEditComment(commentText: string) {
 		editComment({
-			_type: "comment",
-			_id: comment._id,
-			author: {
-				_type: "reference",
-				_ref: comment.author?._id,
-			},
-			post: {
-				_ref: postId,
-				_type: "reference",
-			},
+			commentId: comment._id,
+			authorId: comment.author?._id,
+			postId,
 			comment: commentText,
 		})
 	}
@@ -87,9 +80,7 @@ const Comment = ({
 							type="text"
 							placeholder="write your comment"
 							value={value}
-							onChange={(e) =>
-								setValue(e.target.value)
-							}
+							onChange={(e) => setValue(e.target.value)}
 							className="w-full outline-none p-1 h-10 sm:h-fit"
 							required
 						/>

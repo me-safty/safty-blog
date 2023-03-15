@@ -15,6 +15,12 @@
 		"jsx": "preserve",
 		"incremental": true
 	},
-	"include": ["next-env.d.ts", "**/*.ts", "**/*.test.ts", "**/*.tsx", "pages/index.jsx", "components/posts/post-preview/comments/CommentSubmitForm.test.tsx"],
+	"include": [
+		"next-env.d.ts",
+		"**/*.ts",
+		"**/*.test.ts",
+		"**/*.tsx",
+		"pages/index.jsx"
+	],
 	"exclude": ["node_modules"]
 }

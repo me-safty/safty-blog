@@ -1,7 +1,7 @@
 import { NextPage } from "next"
-import { Post } from "../../typing"
+import { Post } from "../../../typing"
 import Image from "next/image"
-import { urlFor } from "../../lib/sanity"
+import { urlFor } from "../../../lib/sanity"
 import Link from "next/link"
 import { motion } from "framer-motion"
 export interface Props {
@@ -16,7 +16,7 @@ const Trends: NextPage<Props> = ({ posts }) => {
 			initial={{ x: -30, opacity: 0 }}
 			animate={{ x: 0, opacity: 1 }}
 			transition={{ duration: 0.5 }}
-			className="px-4 py-8 sm:p-8 rounded-xl bg-orange-300 group relative"
+			className="px-4 py-8 sm:p-8 rounded-xl bg-orange-300 group relative h-full"
 		>
 			<div>
 				<h1 className="text-3xl font-medium mb-1 text-white">Trending</h1>
@@ -37,7 +37,10 @@ const Trends: NextPage<Props> = ({ posts }) => {
 							</p>
 						</Link>
 						<div className="mt-2">
-							<Link href={`/users/${post.author.slug.current}`} className="w-fit block">
+							<Link
+								href={`/users/${post.author.slug.current}`}
+								className="w-fit block"
+							>
 								<div className="flex gap-2 items-center w-fit">
 									<Image
 										src={

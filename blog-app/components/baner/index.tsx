@@ -1,41 +1,17 @@
 import { motion } from "framer-motion"
 import brush from "../../public/brush.png"
 import Image from "next/image"
+
 interface banerProps {
 	firstTitle?: string
 	secondTitle?: string
 }
+
 const Baner = ({
 	firstTitle = "all in one place ",
 	secondTitle = "Safty Blog",
 }: banerProps) => {
 	return (
-		//<div className="container border-b-2 border-black flex items-center justify-between py-10 px-3.5  md:py-16 md:px-6 bg-yellow-400">
-		//	<div>
-		//		<h1 className="text-4xl md:text-5xl font-serif mb-4 max-w-md">
-		//			<Link
-		//				className="underline cursor-pointer decoration-4f"
-		//				href="/"
-		//			>
-		//				Safty Blog
-		//			</Link>{" "}
-		//			is a place to write, read, and connect
-		//		</h1>
-		//		<p className="text-xs md:text:sm max-w-lg">
-		//			It's easy and free to post your thinking on any topic and connect with
-		//			millions of readers.
-		//		</p>
-		//	</div>
-		//	<div
-		//		className="hidden lg:block font-serif font-extrabold select-none scale-90"
-		//		style={{
-		//			fontSize: "20rem",
-		//			lineHeight: "16rem",
-		//		}}
-		//	>
-		//		<h1>M</h1>
-		//	</div>
-		//</div>
 		<div className="container">
 			<motion.div
 				initial={{ scale: 0.95, opacity: 0 }}

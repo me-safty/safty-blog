@@ -4,8 +4,8 @@ import Link from "next/link"
 import { category, Post } from "../../typing"
 import Baner from "../baner"
 import Button from "../button"
-import Catagories from "../catagories"
-import Trends from "../trends"
+import Catagories from "./catagories"
+import Trends from "./trends"
 export interface Props {
 	catagories: category[]
 	posts: Post[]
@@ -32,7 +32,7 @@ const Landing: NextPage<Props> = ({ catagories, posts }) => {
 				)}
 			</div>
 			<div className="pt-10">
-				<div className="container flex flex-col-reverse lg:flex-row gap-10">
+				<div className="container flex flex-col-reverse lg:flex-row gap-10 overflow-hidden sm:overflow-visible">
 					<div className="h-[420px] lg:w-[65%] xl:w-[70%]">
 						<Trends posts={posts} />
 					</div>

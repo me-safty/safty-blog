@@ -23,7 +23,20 @@ export default async function editCommentAPI(
 ) {
 	if (req.method === "PUT") {
 		try {
-			await sanityClint.createOrReplace(JSON.parse(req.body))
+			const { commentId, authorId, postId, comment } = JSON.parse(req.body)
+			await sanityClint.createOrReplace({
+				_type: "comment",
+				_id: commentId,
+				author: {
+					_type: "reference",
+					_ref: authorId,
+				},
+				post: {
+					_ref: postId,
+					_type: "reference",
+				},
+				comment: comment,
+			})
 			res.status(200).json({ message: "comment edited" })
 		} catch (error) {
 			console.log(error)

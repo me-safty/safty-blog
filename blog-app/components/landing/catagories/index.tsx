@@ -1,7 +1,7 @@
 import { motion } from "framer-motion"
 import { NextPage } from "next"
 import Link from "next/link"
-import { category } from "../../typing"
+import { category } from "../../../typing"
 import s from "./categories.module.css"
 interface Props {
 	catagories: category[]
@@ -13,7 +13,7 @@ const Catagories: NextPage<Props> = ({ catagories }) => {
 			initial={{ x: 30, opacity: 0 }}
 			animate={{ x: 0, opacity: 1 }}
 			transition={{ duration: 0.5, delay: 0.2 }}
-			className="px-5 py-8 sm:p-8 rounded-xl bg-fuchsia-500 text-white group"
+			className="px-5 py-8 sm:p-8 rounded-xl bg-fuchsia-500 text-white group h-full"
 		>
 			<div className="mb-5">
 				<h1 className="text-3xl font-medium mb-1">Catagories</h1>

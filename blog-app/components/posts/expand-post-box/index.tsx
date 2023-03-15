@@ -12,9 +12,11 @@ export interface ExpandBoxPostProps {
 const ExpandBoxPost: FC<ExpandBoxPostProps> = ({ post }) => {
 	return (
 		<motion.div
+			initial={{ x: -40, opacity: 0, scale: 1 }}
+			whileInView={{ x: 0, opacity: 1 }}
 			whileHover={{ scale: 1.01 }}
 			whileTap={{ scale: 0.97 }}
-			transition={{ duration: 0.2 }}
+			transition={{ duration: 0.5 }}
 			className="group my-[50px] rounded-xl flex flex-col sm:flex-row gap-4 sm:gap-7 lg:gap-10 shadow-md sm:shadow-none"
 		>
 			<motion.div
