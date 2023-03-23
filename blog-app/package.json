@@ -20,7 +20,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.41.0",
     "react-portable-text": "^0.5.1",
-    "superjson": "^1.12.0"
+    "superjson": "^1.12.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
