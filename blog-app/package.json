@@ -10,7 +10,7 @@
     "@sanity/image-url": "^1.0.1",
     "@uiw/react-md-editor": "^3.6.0",
     "babel-plugin-superjson-next": "^0.4.5",
-    "framer-motion": "^9.0.1",
+    "framer-motion": "^9.1.7",
     "next": "latest",
     "next-auth": "^4.20.1",
     "next-remove-imports": "^1.0.8",
